@@ -44,6 +44,19 @@ It should be expected that the C++ standard library (as defined in C++14) will b
 
 \subsection{Sensing} The system shall monitor and perform analog-to-digital conversion of the spectral values sensor values at least every 15 minutes while in active mode. The system will use I2C to talk to the analog-to-digital converter (ADC) located in the sensing subsystem. 
 
+\subsection{Motor Control} Four GPIO lines will be used to control the stepper motor holding the sensing PCB (which includes the photodiodes, op-amp circuitry, ADC, motor controller, and connector). Depending on the digital values passed to the motor controller, the motor controller is able to control the movement direction and speed. Our team found that using the SimpleLink SDK's high-level hardware abstraction layer (HAL) provides too long of a delay when changing values in the four GPIO lines. Nanosecond-levels of delay were needed, rather than the microsecond levels of delay our team was seeing. Instead of using highly-abstracted APIs for control of the motor, our team got as close to hardware as is possible with C/C++ and used TI's driverlib driver library specifically for the CC3220. Instead of a simple GPIO number being passed to the function, our team had to determine the GPIO port and port-specific pin of each input of our motor controller. The driverlib function checks the port for correctness, and then performs a system call to write a value directly to memory (in our case, the address of the GPIO port). Using driverlib also allows us to bit stuff our GPIO pins if they are located on the same port---in our second iteration of the board, the motor controller GPIOs were relocated to the same GPIO port and bitmasks used so we can change all four GPIO pins with one driverlib write function. This allows us to toggle a single GPIO pin within a period of 350 ns (seen in \ref{fig:gpio_toggle_driverlib}). With a speed of 80 MHz in active mode, this would mean we're able to write to GPIO in only 28 processor cycles.
+\begin{equation}
+    350\,\mathrm{ns} \times (80\times10^6\mathrm{cycles/s}) = 28\,\mathrm{cycles}
+\end{equation}
+This is a huge accomplishment for our team, especially with a program written in C++ and utilizing HAL.
+
+\begin{figure}
+    \centering
+    \label{fig:gpio_toggle_driverlib}
+    \includegraphics[width=\linewidth]{images/gpio_toggle_driverlib.jpg}
+    \caption{Toggling GPIO using driverlib results in a very short (350 ns) delay.}
+\end{figure}
+
 % How the MCU gets data from sensors (ADC)
 \subsection{Analog-to-digital Conversion}
 The sensing subsystem contains a Texas Instruments ADS 7142 ADC. The ADS 7142 is an IoT-focused nanowatt ADC with 2 external channels, an I2C interface, a sampling frequency of 140ksps, and an effective resolution of 16 bits in High-precision Mode. This ADC will be able to measure between 0 and 3.3 V from the output of the sensing subsystem's  photodiode op-amp circuit.
@@ -60,6 +73,53 @@ These steps will be used to measure OH composition and nutrients in the soil. Th
 \subsection{Development Model}
 An Agile development model was used to program the control subsystem and its various modules. Code reviews were performed on an as-needed basis by a convening of members of the MCU subsystem and the web subsystem teams. Texas Instruments Code Composer Studio v12 was used to program, compile (via TI ARM compiler v20), and debug the C++-based project. GitHub was used as a repository for the project, using GNU Git for version control.
 
+The Meyers' Singleton design pattern was used for most of the classes found in our project repository (e.g. for our water solenoid class as seen in \ref{fig:singleton_implementation}). Because our team is using a RTOS with a scheduler and threads, we are using that to our advantage to divide and schedule tasks for the different submodules of our project. However, one problem our team took into consideration is that there is was only one physical instance of each submodule. The normal Singleton pattern traditionally has been used when one wants only one instance of a class initialized at any one point, but they are not thread-safe. One variation of this pattern is the Meyers' Singleton, which guarantees that only one instance of a type is available at any time. Initialization of this pattern is thread-safe, and locks can be used to ensure thread safety when accessing members of the class. This is accomplished by using a static local variable inside a static member function to hold a single instance of the class. The Meyers' Singleton takes advantage of the fact that the initialization of static local variables inside functions is guaranteed to be thread-safe. The Meyers' Singleton disallows copying and moving of the class, and makes member constructors and destructors private.
+
+% Code style
+\lstdefinestyle{mystyle}{
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=-15pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\begin{figure}
+    \centering
+    \label{fig:singleton_implementation}
+
+\begin{lstlisting}[language=C++]
+    class Water { 
+        public:
+            static Water& instance();
+
+            // Disallow copying
+            Water& operator = (const Water&) = delete;
+            Water(const Water&) = delete;
+
+            // Disallow moving
+            Water& operator = (Water&&) = delete;
+            Water(Water&&) = delete;
+
+            // Class functions
+        
+        private:
+            Water();
+            ~Water();
+
+            // Class variables
+    };
+\end{lstlisting}
+\caption{An example of the Meyers' Singleton pattern implementation within the project.}
+\end{figure}
+
 % Power
 \subsection{Power}
 The MCU will receive regulated 3.3, 5, and 12 V power from from the power subsystem. This power will be routed to various modules and other subsystems.
@@ -68,4 +128,11 @@ The MCU will receive regulated 3.3, 5, and 12 V power from from the power subsys
 \subsection{LEDs} The system shall be able to make use of its onboard LEDs for notifying the user or developers of system states. When the system is in active mode, the green LED shall be solidly illuminated. When the system is in low power mode, the green LED shall flash 1 time for a period of 0.5 seconds, every 2 seconds. When the system is in critical power mode, the red LED shall flash 2 times for a period of 0.5 seconds per flash, seperated by 1 second between each flash, every 30 seconds. When the system is in shutdown mode, no LEDs shall be active. When the system is starting up, the green and red LED shall be solidly illuminated until the startup sequence is completed and the system transitions into a different power mode.
 
 % PCB
-\subsection{Printed Circuit Board} Our controller subsystem was developed and implemented on a Texas Instruments LaunchPad development board. An initial control printed circuit board (PCB) was designed, fabricated, and assembled. The chip version of the CC3220 (CC3220S) was used requiring a 4-layer impedance-controller PCB, with waveguide and external antenna, as well as oscillators, numerous bypass capacitors, and inductors. A revised PCB was designed using the module version of the CC3220 (CC3220MODAS). The PCB design was simplified, requiring only a few bypass capacitors instead of the numerous other components to support the microcontroller found on the first revision of the board.
+\subsection{Printed Circuit Board} Our controller subsystem was developed and implemented on a Texas Instruments LaunchPad development board. An initial control printed circuit board (PCB) was designed, fabricated, and assembled (partially seen in \ref{fig:mcu_v1_cpwg}). The chip version of the CC3220 (CC3220S) was used requiring a 4-layer impedance-controller PCB, with waveguide and external antenna, as well as oscillators, numerous bypass capacitors, and inductors. A revised PCB was designed using the module version of the CC3220 (CC3220MODAS). The PCB design was simplified, requiring only a few bypass capacitors instead of the numerous other components to support the microcontroller found on the first revision of the board.
+
+\begin{figure}
+    \centering
+    \label{fig:mcu_v1_cpwg}
+    \includegraphics[width=\linewidth]{images/mcu_v1_cpwg.jpg}
+    \caption{The coplanar waveguide designed to carry a 2.4 GHz signal surrounded by via fencing.}
+\end{figure}
