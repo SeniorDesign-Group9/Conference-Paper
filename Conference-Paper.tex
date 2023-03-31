@@ -102,9 +102,65 @@ the source on an array with the only major downside being the duration needed to
 \section{Major Components} \label{sec:major-components}
 The components found in this section make up the logical boundaries between systems and their
 subsystems. 
+\subsection{Power Subsystem} \label{sec:power subsystem}
+The components that make up this subsystem in all are the battery, solar panels, voltage regulators, 
+and the charge controller. These components together also make our system operate working with other 
+subsystems but also helping the other subsystems work together as well. 
+
+Solely, to make any product or system to operate, power is needed in some type of form. DC power 
+connectors, batteries, connection to a direct source, there are many different ways to obtain power 
+in order for something to operate. DC power connectors have always been around and have been used 
+in many different scenarios for different situations. They give access to constant power easily 
+because we are able to simply plug it into a wall outlet and they are also inexpensive. Batteries, 
+like the power connectors, also come in differnt forms. Batteries can be made of different materials, 
+they can have different ratings, and other features as well. On the other hand, batteries can discharge 
+and run out of power. 
+
+In recent years, there has been a rise in energy storage, small and large scale. In 2021 alone, there 
+was a 60\% increase in energy storage capacity. This is because of the increase in sustainable energy 
+programs, such as solar, that there is a demand in either new or more energy storage, mainly batteries. 
+Batteries are being deployed for economic and safety reasons. Battery technology is advancing to become 
+more powerful, last longer, and become safer for consumers. In our project, we wanted to incorporate 
+energy storage as a way to make our system operate independently. There were many batteries to choose 
+from with new battery chemistries rising as well as existing chemistries advancing, but for our system 
+we decided to go with a LiFePo4 battery. This was our choice because many reasons including a longer 
+life span, they do not require too much maintenance, extremely safe, improved discharge and charge 
+efficiency, and so much more. 
+
+Another growing piece of technology that is utilized in this project are solar panels. Solar technology 
+in general has seen its advances in recent years and increase in demand for solar panels. Part of making 
+our system operate independently we went with solar engergy, even though our system is battery powered, 
+solar energy is charging the battery. With solar panels, there three different types of solar panels, 
+monocrystalline, polycrystalline, and thin-film, all of which differ in material and composition, vary in 
+effiencies, and few other aspects. To get the highest efficiency, the solar panels that were picked were 
+the monocrystalline.
+
+Working with the battery and the solar panel is the solar charge controller. Simply put, the main role of 
+charge controller is to ensure that the battery is not being overcharged. The way solar panels and batteries 
+work together is that as the battery is not operating after usage, the solar panels collect energy that 
+is brought to the battery to charge. Now if the battery is at full capacity, it is dangerous to continue 
+to bring more energy into it because it could damage it and decrease its life span. There are two different 
+charge controllers, both of which manage the amount of charge that is going into the battery, maximum power 
+point tracking and pulse width modulation. To ensure the highest efficiency as well, we went with the 
+maximum power point tracking charge controller.
+
+Lastly, the voltage regulators. Voltage regulators are and important part to any electronic product because 
+similar to the charge controller they manage voltage. The main role of the voltage regulator is the regulate 
+voltage, either increasing or decreasing voltage to a specified level that is needed. This is important 
+because in houses the standard wall outlet is 12V, but a certain product needs only 5V. Plugging this product 
+into the wall directly the product will overcharge and break. Similarly, there are many different types of 
+voltage regulators too, all of which operate differently and have different features. In integration, the 
+voltage regulators work with all the other subsystems because the components in their system operate on 
+differnt voltages. So, from the our 12V battery, it travels to our power PCB and then from there power is 
+distrubuted among the rest of the system and sending the appropriate voltages to each component. For this 
+project, we decided on a few differnt voltage regulators because some of our other components varied in 
+voltages from 3.3V, 5V and 12V. 
+
 \section{Hardare Detail}
 In \autoref{sec:major-components}, a high level overview of components and features were given. This
 section will discuss the implementation details of the chosen components.
+\subsection{Power Subsystem} \label{sec:power subsystem}
+
 \section{Software Detail}
 The microntroller serves as the glue holding this design together. In this section the means of
 integrating the various subsystems via software will be discussed.
