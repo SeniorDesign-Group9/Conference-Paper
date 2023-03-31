@@ -1,5 +1,12 @@
 \documentclass[journal]{IEEEtran}
+\usepackage{amsmath}
+\usepackage{gensymb}
 \usepackage{graphicx} % Required for inserting images
+\usepackage{tabularx}
+\usepackage{listings} 
+\usepackage{ltablex}
+\usepackage{upgreek}
+\usepackage{multirow}
 \usepackage{hyperref}
 
 \begin{document}
@@ -75,6 +82,9 @@ and notify users with information of its health. Generating and guiding electrom
 housing, scanning the substance, and then converting this optical power into a voltage that can be 
 read and analyzed. It is then the microcontroller will communicate with the web system, storing the 
 information and deciding on if anything needs to be done and notifying the user. 
+
+\input{control.tex}
+
 \subsection{Goals} \label{sec:goals}
 The following are the goals the team set for themselves with this project. Starting with non-
 negotiable goals:
