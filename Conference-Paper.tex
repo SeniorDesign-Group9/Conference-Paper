@@ -7,6 +7,7 @@
 \usepackage{ltablex}
 \usepackage{upgreek}
 \usepackage{multirow}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -84,4 +85,37 @@ information and deciding on if anything needs to be done and notifying the user.
 
 \input{control.tex}
 
+\subsection{Goals} \label{sec:goals}
+The following are the goals the team set for themselves with this project. Starting with non-
+negotiable goals:
+\begin{enumerate}
+   \item A spectrometer that operates in the 400nm to 1700nm band with a spectral resolution less
+         than 50nm and signal-to-noise ratio greater than 2.
+   \item The ability to automatically feed water into the garden bed.
+   \item Serve data to the user.
+\end{enumerate}
+Moving on, the team had goals they hoped to accomplish:
+\begin{enumerate}
+   \item Power the garden bed completely from solar and battery power.
+   \item Serve data to the user via a website.
+\end{enumerate}
+\section{High-Level Design}
+Based on the goals listed in \autoref{sec:goals} this section will discuss the high-level thought
+process the team undertook in achieving those goals.
+\subsection{Spectrometer} 
+In most instances, spectrometers are designed using charged couple devices in an array which some
+component such as a prism or diffraction grating will shine upon breaking the source into its
+components. This approach would be prohibitively expensive for such a consumer-oriented garden
+bed. The solution was to use either a photodiode or photoresistor to measure the magnitude of the
+of optical power in a given area. This sensor could be moved in order to give the effect of shining
+the source on an array with the only major downside being the duration needed to scan. 
+\section{Major Components} \label{sec:major-components}
+The components found in this section make up the logical boundaries between systems and their
+subsystems. 
+\section{Hardare Detail}
+In \autoref{sec:major-components}, a high level overview of components and features were given. This
+section will discuss the implementation details of the chosen components.
+\section{Software Detail}
+The microntroller serves as the glue holding this design together. In this section the means of
+integrating the various subsystems via software will be discussed.
 \end{document}
