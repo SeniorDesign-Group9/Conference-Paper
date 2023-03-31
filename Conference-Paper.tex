@@ -78,11 +78,11 @@ these products are not constantly in use, they have to turn of eventually. When 
 solar panel can still collect energy which is stored in a battery for conservation. In this paper, we
 will demonstrate our system running independently, battery powered but charged through solar panels.
 
-In all, this paper will present how near infrared spectroscopy can be used to monitor a plant's environment 
-and notify users with information of its health. Generating and guiding electromagnetic waves into a 
-housing, scanning the substance, and then converting this optical power into a voltage that can be 
-read and analyzed. It is then the microcontroller will communicate with the web system, storing the 
-information and deciding on if anything needs to be done and notifying the user. 
+In all, this paper will present how near infrared spectroscopy can be used to monitor a plant's environment
+and notify users with information of its health. Generating and guiding electromagnetic waves into a
+housing, scanning the substance, and then converting this optical power into a voltage that can be
+read and analyzed. It is then the microcontroller will communicate with the web system, storing the
+information and deciding on if anything needs to be done and notifying the user.
 
 \subsection{Goals} \label{sec:goals}
 The following are the goals the team set for themselves with this project. Starting with non-
@@ -113,7 +113,7 @@ because as of the time of writing, the web server is not serving live data. In t
 
 % Why the MCU connects to the internet
 In order for our system to be as self and power efficient as possible from an end-user perspective, our team decided to use a low-power, Internet-of-Things (IoT)-focused wireless microcontroller. To make the process of operating our product as hands-off as possible to end-users, the microcontroller will operate in Access Point (AP) mode to serve information to the user's mobile device. Our product will not produce or receive large amounts of data, or need complicated control schema for our various subsystems---and with power budget being a major concern of ours, our team needed to choose a product that would fit the bill.
-\subsection{Spectrometer} 
+\subsection{Spectrometer}
 In most instances, spectrometers are designed using charged couple devices in an array which some
 component such as a prism or diffraction grating will shine upon breaking the source into its
 components. This approach would be prohibitively expensive for such a consumer-oriented garden
@@ -225,17 +225,17 @@ The sensing subsystem contains a Texas Instruments ADS 7142 ADC. The ADS 7142 is
 % How the MCU gets data from sensors (ADC, cont.)
 It is expected that each photodiode's circuit will provide a voltage of between 0 and 3.3 V. The 16-bit ADC provides for an input of the same range. Therefore, the resolution of the ADC is calculated below:
 \begin{equation}
-    \frac{(3.3 - 0)\,\mathrm{V}}{2^{16}\,\mathrm{steps}} =
-    50.35\,\mathrm{\mu V}/\mathrm{step}
+	\frac{(3.3 - 0)\,\mathrm{V}}{2^{16}\,\mathrm{steps}} =
+	50.35\,\mathrm{\mu V}/\mathrm{step}
 \end{equation}
 These steps will be used to measure OH composition and nutrients in the soil. The MCU will directly control GPIO and bit-bang values to the stepper motor controlling the position of the photodiodes allowing them to measure the full range of spectral values.
 \subsection{Printed Circuit Board} Our controller subsystem was developed and implemented on a Texas Instruments LaunchPad development board. An initial control printed circuit board (PCB) was designed, fabricated, and assembled (partially seen in \ref{fig:mcu_v1_cpwg}). The chip version of the CC3220 (CC3220S) was used requiring a 4-layer impedance-controller PCB, with waveguide and external antenna, as well as oscillators, numerous bypass capacitors, and inductors. A revised PCB was designed using the module version of the CC3220 (CC3220MODAS). The PCB design was simplified, requiring only a few bypass capacitors instead of the numerous other components to support the microcontroller found on the first revision of the board.
 
 \begin{figure}[H]
-    \centering
-    \label{fig:mcu_v1_cpwg}
-    \includegraphics[width=\linewidth]{images/mcu_v1_cpwg.jpg}
-    \caption{The coplanar waveguide designed to carry a 2.4 GHz signal surrounded by via fencing.}
+	\centering
+	\label{fig:mcu_v1_cpwg}
+	\includegraphics[width=\linewidth]{images/mcu_v1_cpwg.jpg}
+	\caption{The coplanar waveguide designed to carry a 2.4 GHz signal surrounded by via fencing.}
 \end{figure}
 \section{Software Detail}
 The microntroller serves as the glue holding this design together. In this section the means of
@@ -247,25 +247,25 @@ The Meyers' Singleton design pattern was used for most of the classes found in o
 
 % Code style
 \lstdefinestyle{mystyle}{
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=-15pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=-15pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
 }
 \lstset{style=mystyle}
 
 \begin{figure}
-    \centering
-    \label{fig:singleton_implementation}
+	\centering
+	\label{fig:singleton_implementation}
 
-\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
     class Water { 
         public:
             static Water& instance();
@@ -287,26 +287,26 @@ The Meyers' Singleton design pattern was used for most of the classes found in o
             // Class variables
     };
 \end{lstlisting}
-\caption{An example of the Meyers' Singleton pattern implementation within the project.}
+	\caption{An example of the Meyers' Singleton pattern implementation within the project.}
 \end{figure}
 \subsection{Data} As well as being able to see and configure the network settings of the product, the user will be able to see data relating to the OH-levels and common plant nutrient levels as determined by the spectral analysis of the product. For one measurement, our team will need to store 16 bits of data per position from 130 unique positions, per sensor.
 \begin{equation}
-    \frac{16\,\mathrm{b}}{8\,\mathrm{b/B}}\times 130\,\mathrm{positions} \times 2\,\mathrm{sensors} = 520\,\mathrm{B}
+	\frac{16\,\mathrm{b}}{8\,\mathrm{b/B}}\times 130\,\mathrm{positions} \times 2\,\mathrm{sensors} = 520\,\mathrm{B}
 \end{equation}
 With 8 Mb of the 32 Mb (1 MiB of the 4 MiB) shared serial flash dedicated to storing results, this allows us to store 2016 measurements.
 \begin{equation}
-    \frac{1\,\mathrm{MiB}}{520\,\mathrm{B/measurement}} = 2016\,\mathrm{measurements}
+	\frac{1\,\mathrm{MiB}}{520\,\mathrm{B/measurement}} = 2016\,\mathrm{measurements}
 \end{equation}
 Stretching out measurements to be recorded every 15 minutes, this will allow a user to see individual measurements stretching back exactly three weeks.
 \begin{equation}
-    2016\,\mathrm{measurements} \times \frac{1\,\mathrm{measurement}}{15\,\mathrm{min}} = 30240\,\mathrm{min} 
+	2016\,\mathrm{measurements} \times \frac{1\,\mathrm{measurement}}{15\,\mathrm{min}} = 30240\,\mathrm{min}
 \end{equation}
 As a stretch goal these measurements can be aggregated and analyzed, and allow us to serve trends and predictions to the user.
 
 \subsection{Low Power Modes} The system shall run in active mode between sunrise and sunset, while the battery has 40-100\% calculated charge remaining. The system shall run in low power mode between sunrise and sunset while the battery has 10-40\% calculated charge remaining, and between sunset and sunrise while the battery has 10-100\% calculated charge remaining. The system shall run in critical power mode while the battery has 5-10\% calculated charge remaining. The system shall be in shutdown mode while the battery has 0-5\% calculated charge remaining. The system shall be able to switch power modes within 5 seconds of the interrupt being triggered.
 
 \subsection{Connection}
-Our product shall be able to broadcast a WLAN in AP mode. This will allow the user to connect to the product's SSID. The user would then be directed to a web portal hosted by the MCU's internal HTTP server, where they will be able to view information and telemetry related to the product. Hosting a web interface would allow unanimous adaptation of our product for home users. The system shall be able to broadcast a WLAN in AP mode with a nominal signal strength of 6 dBm measured at the antenna. The network shall adhere to the standards of 802.11b, g, or n. 
+Our product shall be able to broadcast a WLAN in AP mode. This will allow the user to connect to the product's SSID. The user would then be directed to a web portal hosted by the MCU's internal HTTP server, where they will be able to view information and telemetry related to the product. Hosting a web interface would allow unanimous adaptation of our product for home users. The system shall be able to broadcast a WLAN in AP mode with a nominal signal strength of 6 dBm measured at the antenna. The network shall adhere to the standards of 802.11b, g, or n.
 
 \subsection{Libraries}
 It should be expected that the C++ standard library (as defined in C++14) will be used, as well as the POSIX library, along with the Texas Instruments SimpleLink CC32xx SDK.
@@ -317,15 +317,15 @@ As a stretch goal, the user will be able to configure the MCU in Station mode to
 \subsection{Motor Controller}
 Four GPIO lines will be used to control the stepper motor holding the sensing PCB (which includes the photodiodes, op-amp circuitry, ADC, motor controller, and connector). Depending on the digital values passed to the motor controller, the motor controller is able to control the movement direction and speed. Our team found that using the SimpleLink SDK's high-level hardware abstraction layer (HAL) provides too long of a delay when changing values in the four GPIO lines. Nanosecond-levels of delay were needed, rather than the microsecond levels of delay our team was seeing. Instead of using highly-abstracted APIs for control of the motor, our team got as close to hardware as is possible with C/C++ and used TI's driverlib driver library specifically for the CC3220. Instead of a simple GPIO number being passed to the function, our team had to determine the GPIO port and port-specific pin of each input of our motor controller. The driverlib function checks the port for correctness, and then performs a system call to write a value directly to memory (in our case, the address of the GPIO port). Using driverlib also allows us to bit stuff our GPIO pins if they are located on the same port---in our second iteration of the board, the motor controller GPIOs were relocated to the same GPIO port and bitmasks used so we can change all four GPIO pins with one driverlib write function. This allows us to toggle a single GPIO pin within a period of 350 ns (seen in \ref{fig:gpio_toggle_driverlib}). With a speed of 80 MHz in active mode, this would mean we're able to write to GPIO in only 28 processor cycles.
 \begin{equation}
-    350\,\mathrm{ns} \times (80\times10^6\mathrm{cycles/s}) = 28\,\mathrm{cycles}
+	350\,\mathrm{ns} \times (80\times10^6\mathrm{cycles/s}) = 28\,\mathrm{cycles}
 \end{equation}
 This is a huge accomplishment for our team, especially with a program written in C++ and utilizing HAL.
 
 \begin{figure}[H]
-    \centering
-    \label{fig:gpio_toggle_driverlib}
-    \includegraphics[width=\linewidth]{images/gpio_toggle_driverlib.jpg}
-    \caption{Toggling GPIO using driverlib results in a very short (350 ns) delay.}
+	\centering
+	\label{fig:gpio_toggle_driverlib}
+	\includegraphics[width=\linewidth]{images/gpio_toggle_driverlib.jpg}
+	\caption{Toggling GPIO using driverlib results in a very short (350 ns) delay.}
 \end{figure}
 To drive a DC motor we similarly needed a device to separate the digital logic from the back emf of the motor. This is done through the use of the motor driver. The timing of the signals is the most important part as the driver is just using the current and voltage source designed specifically for the motor in the timings given by the input pins. Wrong timing leads to the ability to skip tests leading to indeterministic behavior. The issue is the the CC32xx SDK abstracts away a lot of the fine tunability of setting hardware registers. To resolve this, the team used the specific board's hardware driver implementation to set the output on the pins with a delay of only 28 cycles.
 \subsection{Over-the-Air Updates}
