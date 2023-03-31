@@ -149,4 +149,6 @@ It is at this point that the spectrometer design enters the electrical domain. D
 \section{Software Detail}
 The microntroller serves as the glue holding this design together. In this section the means of
 integrating the various subsystems via software will be discussed.
+\subsection{Motor Controller}
+To drive a DC motor we similarly needed a device to separate the digital logic from the back emf of the motor. This is done through the use of the motor driver. The timing of the signals is the most important part as the driver is just using the current and voltage source designed specifically for the motor in the timings given by the input pins. Wrong timing leads to the ability to skip tests leading to indeterministic behavior. The issue is the the CC32xx SDK abstracts away a lot of the fine tunability of setting hardware registers. To resolve this, the team used the specific board's hardware driver implementation to set the output on the pins with a delay of only 28 cycles. COMBINE WITH BRENDAN'S SECTION ON THE TOPIC
 \end{document}
