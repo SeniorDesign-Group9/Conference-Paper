@@ -102,11 +102,7 @@ the source on an array with the only major downside being the duration needed to
 \section{Major Components} \label{sec:major-components}
 The components found in this section make up the logical boundaries between systems and their
 subsystems. 
-\subsection{Power Subsystem} \label{sec:power subsystem}
-The components that make up this subsystem in all are the battery, solar panels, voltage regulators, 
-and the charge controller. These components together also make our system operate working with other 
-subsystems but also helping the other subsystems work together as well. 
-
+\subsection{Battery} \label{sec:battery}
 Solely, to make any product or system to operate, power is needed in some type of form. DC power 
 connectors, batteries, connection to a direct source, there are many different ways to obtain power 
 in order for something to operate. DC power connectors have always been around and have been used 
@@ -126,15 +122,14 @@ from with new battery chemistries rising as well as existing chemistries advanci
 we decided to go with a LiFePo4 battery. This was our choice because many reasons including a longer 
 life span, they do not require too much maintenance, extremely safe, improved discharge and charge 
 efficiency, and so much more. 
-
-Another growing piece of technology that is utilized in this project are solar panels. Solar technology 
-in general has seen its advances in recent years and increase in demand for solar panels. Part of making 
-our system operate independently we went with solar engergy, even though our system is battery powered, 
-solar energy is charging the battery. With solar panels, there three different types of solar panels, 
-monocrystalline, polycrystalline, and thin-film, all of which differ in material and composition, vary in 
-effiencies, and few other aspects. To get the highest efficiency, the solar panels that were picked were 
-the monocrystalline.
-
+\subsection{Solar Panel} \label{sec:solar pane}
+Solar technology in general has seen its advances in recent years and increase in demand for solar panels. 
+Part of making our system operate independently we went with solar engergy, even though our system is 
+battery powered, solar energy is charging the battery. With solar panels, there three different types of 
+solar panels, monocrystalline, polycrystalline, and thin-film, all of which differ in material and 
+composition, vary in effiencies, and few other aspects. To get the highest efficiency, the solar panels 
+that were picked were the monocrystalline.
+\subsection{Charge Controller} \label{sec:charge controller}
 Working with the battery and the solar panel is the solar charge controller. Simply put, the main role of 
 charge controller is to ensure that the battery is not being overcharged. The way solar panels and batteries 
 work together is that as the battery is not operating after usage, the solar panels collect energy that 
@@ -143,7 +138,7 @@ to bring more energy into it because it could damage it and decrease its life sp
 charge controllers, both of which manage the amount of charge that is going into the battery, maximum power 
 point tracking and pulse width modulation. To ensure the highest efficiency as well, we went with the 
 maximum power point tracking charge controller.
-
+\subsection{Voltage Regulators} \label{sec:voltage regulator}
 Lastly, the voltage regulators. Voltage regulators are and important part to any electronic product because 
 similar to the charge controller they manage voltage. The main role of the voltage regulator is the regulate 
 voltage, either increasing or decreasing voltage to a specified level that is needed. This is important 
