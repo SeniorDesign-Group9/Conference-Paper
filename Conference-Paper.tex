@@ -316,7 +316,16 @@ voltages from 3.3V, 5V and 12V.
 \section{Hardare Detail}
 In \autoref{sec:major-components}, a high level overview of components and features were given. This
 section will discuss the implementation details of the chosen components.
-\subsection{Power Subsystem} \label{sec:power subsystem}
+\subsection{Power Management} \label{sec:power management}
+When it comes to the power of the whole system, the power subsystem can be broken up into two groups, collection 
+and power. The first group, collection, indcludes the battery, solar panels, and the charge controller. 
+The solar panels stand outside of our box collecting energy that is then processed through the charge 
+controller and then to the battery. It is important that the power goes through the charge controller first 
+because if it went directly to the battery then it after a long time of charge, the battery will not notice 
+that it might be overcharge. In the next group, it will just comprise of the voltage regulators, but these 
+regulators are connected to the rest of the other componets, powering them with the proper voltages. On our 
+PCB, we designed it with three different voltage regulators, to output three different voltages. This is then 
+distrubuted to the proper components.
 
 \section{Software Detail}
 The microntroller serves as the glue holding this design together. In this section the means of
