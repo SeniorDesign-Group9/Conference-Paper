@@ -322,6 +322,16 @@ Stretching out measurements to be recorded every 15 minutes, this will allow a u
 \end{equation}
 As a stretch goal these measurements can be aggregated and analyzed, and allow us to serve trends and predictions to the user.
 
+\subsection{Software Logic Flow} 
+\begin{figure}[H]
+    \centering
+    \label{fig:logic-flow}
+    \includegraphics[width=\linewidth]{images/logic-flow.png}
+    \caption{Software logic flow diagram}
+\end{figure}
+
+The RTOS monitors 4 threads, each dealing with vital functions of the product. The first thread deals with the sensing subsytem and operating the spectrometer, as well as recording results. When a measurement is needed, the lamp is turned on and the spectrometer is stepped through every position to take a voltage reading that is placed in a struct. When the last measurement is taken, the light is turned off, the time is recorded in the struct, and the measurement struct is pushed to a queue. The HTTP server thread reads the results from the queue and posts them for the user to see. The power supervisor thread reads from the charge controller every minute. If it encouters an unsafe situation, it is able to command the system's power state to resolve the situation. Lastly, the water supervisor thread controls the water solenoid, turning it on and off according to parameters input by the user.
+
 \subsection{Connection}
 Our product broadcasts a WLAN in AP mode that allows the user to connect to the product. The user is then directed to a web portal hosted by the MCU's internal HTTP server, where they will be able to view information, sensing data, and telemetry related to the product. Hosting a web interface would allow unanimous adaptation of our product for home users.
 
