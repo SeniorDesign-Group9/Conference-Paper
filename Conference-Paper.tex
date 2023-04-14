@@ -169,7 +169,7 @@ section will discuss the implementation details of the chosen components.
 The spectrometer is comprised of 5 major components, the photosensitive device, the linear rail and motor controller, the analog-to-digital converter, and the light source. The light source is connected via a Darlington transistor as it is driven with a 12V supply @ 1.7A. The darlington transistor will keep separate this electrical supply from the digital logic to control the lamp. The light source is fed into a fiber optic cable and pointed at a patch of soil which will reflect light into a secondary fiber optic cable.
 This project involves a large diffuse source, the illumined soil. The Fiber collimator will be attached to the fiber cable via their SMA connectors, then the collimator will be set in an acrylic block so that it rests 8.06mm above the soil. The block will also have a slot for the Light source to illuminate the soil at an angle, similar to the arrangement of the source and sensor in a computer mouse above a mousepad.
 The signal will travel through the fiber and up into the spectrometer housing, where the other connector of the cable will be mounted in place. Another collimator will take the output beam and collimate it so that it propagates through free space into the housing. The collimator has an output beam diameter of 1.7mm. This planar wavefront will strike the diffraction grating.
-We will call to the first optic cable as the source, and the second cable as the signal. From the signal cable, the light is transmitted onto a diffraction grating. This diffraction grating will split all the wavelengths of light across a rotational area of 47\textdegree. At this point, the team can do simple trigonometry to translate a linear position to a range of wavelengths being scanned. The team chose for the sensor to be at a distance of 30mm from the diffraction grating. 
+We will call to the first optic cable as the source, and the second cable as the signal. From the signal cable, the light is transmitted onto a diffraction grating. This diffraction grating will split all the wavelengths of light across a rotational area of 47\degree. At this point, the team can do simple trigonometry to translate a linear position to a range of wavelengths being scanned. The team chose for the sensor to be at a distance of 30mm from the diffraction grating. 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{images/DiffractionAngleCalculator.png}
@@ -289,6 +289,16 @@ Stretching out measurements to be recorded every 15 minutes, this will allow a u
     2016\,\mathrm{measurements} \times \frac{1\,\mathrm{measurement}}{15\,\mathrm{min}} = 30240\,\mathrm{min} 
 \end{equation}
 As a stretch goal these measurements can be aggregated and analyzed, and allow us to serve trends and predictions to the user.
+
+\subsection{Software Logic Flow} 
+\begin{figure}[H]
+    \centering
+    \label{fig:logic-flow}
+    \includegraphics[width=\linewidth]{images/logic-flow.png}
+    \caption{Software logic flow diagram}
+\end{figure}
+
+The RTOS monitors 4 threads, each dealing with vital functions of the product. The first thread deals with the sensing subsytem and operating the spectrometer, as well as recording results. When a measurement is needed, the lamp is turned on and the spectrometer is stepped through every position to take a voltage reading that is placed in a struct. When the last measurement is taken, the light is turned off, the time is recorded in the struct, and the measurement struct is pushed to a queue. The HTTP server thread reads the results from the queue and posts them for the user to see. The power supervisor thread reads from the charge controller every minute. If it encouters an unsafe situation, it is able to command the system's power state to resolve the situation. Lastly, the water supervisor thread controls the water solenoid, turning it on and off according to parameters input by the user.
 
 \subsection{Connection}
 Our product broadcasts a WLAN in AP mode that allows the user to connect to the product. The user is then directed to a web portal hosted by the MCU's internal HTTP server, where they will be able to view information, sensing data, and telemetry related to the product. Hosting a web interface would allow unanimous adaptation of our product for home users.
