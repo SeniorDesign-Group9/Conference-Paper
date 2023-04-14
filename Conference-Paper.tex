@@ -22,84 +22,91 @@
 \end{center}
 
 \begin{abstract}
-   This paper will show the application of near infrared spectroscopy 
-and how it can measure electromagnetic waves from the emission of soil. Near infrared spectroscopy 
-is an absorption spectroscopy method that can help determine the chemical composition of a 
-substance through the radiation the substance gives off. Soil itself is a mixture of organic and 
-inorganic substances that all together directly contribute to a garden’s environment. We are 
-starting with soil with unknown qualities, so comparisons will be made between our soil and soil 
-of known qualities to match and ensure that our plant is in a healthy and suitable environment. 
+   Advances in both electronics and optoelectronics have greatly increased the accessibility
+of complex devices. This paper will demonstrate the feasibility of installing a near infrared
+scanning spectrometer into any yard, garden, or greenhouse for soil characterization with no need
+for infrastructure to support it, except a water hose. Self-sufficiency will be achieved through solar
+energy collection and battery storage. System control will be achieved via an electronic microcontroller.
+The soil characteristics measured will be Moisture Content, Phosphorous, and Carbon. This data will be
+interpreted by the microcontroller to adjust the garden bed which the device is installed on and make
+the data accessible to the user. 
 \end{abstract}
 
 \section{Introduction}
-\IEEEPARstart{I}{n} the past year, we have seen a great increase in remote sensing, wireless 
-communication, API integration, and so much more. All of which have been made more available and 
-economical. The internet has also seen its share of ``DIY" projects and its continuing growth.
+\IEEEPARstart{S}{o}il characterization is shifting away from laboratory analysis and toward optical
+sensing. While chemistry experiments may determine soil composition with high degrees of accuracy,
+they are unfeasible on economies of scale. Every sample must be preserved for a trip back to the lab,
+and lab work takes time and other valuable resources to evaluate even a single sample. Some lab work
+can be done in the field, but this limits the accuracy and types of elements that can be investigated.
+Spectral sensing offers two advantages: results returned by devices are limited only by scanning speeds
+and computing power, and scanning covers a lot of ground, rather than a small spot. There is now a
+market for precision agricultural technology, and research is ongoing to improve the efficiency of
+these devices.
 
-In the agriculture industry, there have been new advancements in technology with high performance 
-water distribution, network communication, and remote sensing. This research is intended to advance
-the field by producing a system that can maintain a suitable environment for a plant to grow. In the 
-environment, there will be sensors that will help modify the conditions within the environment. In 
-addition to this system, it will feature a web interface for notifications and the ability for the 
-user to set settings.
+Soil Scanners, like those developed by AgroCares, MertControl Group, and NPC Agro, typically employ
+a broadband light source to probe the soil, then collect reflectance data using an array of photodetectors.
+Relevant spectral data is mostly contained within the near and mid infrared regimes. However, Moisture
+Content, Carbon, Phosphorous, and pH all have spectral fingerprints that can be detected within the visible
+and near infrared spectrum. A reflectance scanning spectrometer with a broadband source and one or two
+cheap detectors covering the 400-1700nm range are sufficient to measure these variables.
 
-Monitoring soil isn't always the most fun or the easiest task, because things could get dirty or we 
-might forget about our plant. This project will feature an on-the-rise technology in the form of a 
-spectrophotometer. Smart systems nowadays are big learning machines that are constantly aware of its 
-surroundings. For a smart agricultural system, it would need to determine variables such as moisture 
-levels, nutrient content, pH levels, and so much more. This paper will introduce near infrared 
-spectroscopy as another method to soil sensing that may prove to be more beneficial over traditional 
-products or techniques.
+In addition to professional products and services, hobby project forums are also advancing the
+accessibility of complex systems. Hydroponic gardeners are experimenting with water distribution systems,
+Arduino programmers have created a market for cheap network communication devices, and optoelectronics
+hobbyists have even developed DIY optical spectrometers\cite{Cao}. These projects represent a major development in
+engineering activity. It is now possible for a small, poorly funded team of amateurs to create a device
+with not only mechanical function, but also wireless control and user interfacing. 
 
-This project will also present other fields such as system controls, power, and web, all to provide 
-a "set it and forget it" home gardening experience. A home gardening experience where the garden bed 
-can communicate with the user and the user can provide instruction of what to do, but also at the 
-core, this is a microcontroller project that anybody can do with just slight knowledge and understanding
-of digital communications. Like any smart device too, the internet plays an important role in making 
-this as hands-off as it can be. There are many different communication protocols such as Bluetooth, 
-Zigbee, Thread, and even short-range/long-range protocol. For this project we decided to go with WiFi 
-because of its decreased bandwidth and that we aren't expecting to produce or receive large amounts 
-of data. 
+\section{Materials and Methods}
 
-An important aspect to a lot of devices as well is data storage and web usage. This is important so 
+This project will integrate system controls, power, and the web, all to provide 
+a "set it and forget it" home gardening experience. There are many different communication protocols
+such as Bluetooth, Zigbee, Thread, and even short-range/long-range protocol. For this project we
+decided to go with WiFi because of its decreased bandwidth and because we aren't expecting to produce or
+receive large amounts of data. 
+
+Another important aspect is data storage and web usage. This is important so 
 that we can look back on previous information and make observations and conclusions. With our 
 microcontroller, the web system is going to communicate with it through transmission control protocol.
-Transmission control protocol is a standard on how to establish and maintain a network connection to 
-exchange data. The web system will also have 16gb database to store data and have the ability to support 
+Transmission control protocol is a standard to establish and maintain a network connection to 
+exchange data. The web system will also have a 16GB database to store data and have the ability to support 
 multiple garden beds in a scaled solution. As mentioned before, the web system will have a feature to 
-allow the user to set settings but also read the data that is stored. Lastly, an important factor to 
-any garden is the weather and knowing when it might be cold, hot, or even rain outside. As a part of 
-our web system, it will communicate using HTTP requests with a weather service to receive updates on 
-the weather.
+allow the user to adjust settings but also read the data that is stored. An important factor to any 
+environment is the weather and knowing when it might be cold, hot, or even rain outside. Our web system 
+will communicate using HTTP requests with a weather service to receive updates that will be passed along 
+to the user, when needed.
 
-Solar power has been a growing source of energy for the past years and still continues to be with new 
-developments and breakthroughs with solar technology. A lot of systems nowadays are solar powered but 
-these products are not constantly in use, they have to turn of eventually. When the product is off the 
-solar panel can still collect energy which is stored in a battery for conservation. In this paper, we 
-will demonstrate our system running independently, battery powered but charged through solar panels.
+Solar power has been a growing source of energy in recent years and still continues to be with new 
+developments and breakthroughs with solar technology. A lot of systems nowadays are solar powered, but 
+these products are not constantly in use, they have to turn off eventually. When the product is off the 
+solar panel can still collect energy which is stored in a battery for conservation. Our project will be 
+the same, battery powered but charged through solar panels.
 
-In all, this paper will present how near infrared spectroscopy can be used to monitor a plant's environment 
-and notify users with information of its health. Generating and guiding electromagnetic waves into a 
-housing, scanning the substance, and then converting this optical power into a voltage that can be 
-read and analyzed. It is then the microcontroller will communicate with the web system, storing the 
-information and deciding on if anything needs to be done and notifying the user. 
+There are several means of achieving near infrared spectrometry. Our group elected to build a reflectance 
+scanning spectrometer. While transmission gratings are substantially cheaper, they lose much optical power 
+outside of the zero order, which is unusable due to spectral overlap. A reflectance grating will allow for 
+maximum signal to noise ratio. The next challenge is how to scan. A rotational scanner was considered and 
+rejected, on account of the difficulties of mechanical design. A rotating mount would have to have high 
+precision movement, be rigid to ensure maintained optical alignment, and would greatly increase the 
+complexity of optical alignment. A linear actuator rail with a stepper motor offered a better solution. 
+Rather than change the path of the beam, it changes the position of the photodetectors along the axis of 
+diffraction. This allowed for rectangular geometries, reducing the mechanical complexity of the optical 
+mounts.\\
 
-\subsection{Goals} \label{sec:goals}
-The following are the goals the team set for themselves with this project. Starting with non-
-negotiable goals:
+The following are the goals the team set for themselves with this project. Starting with the Primary Goals:
 \begin{enumerate}
    \item A spectrometer that operates in the 400nm to 1700nm band with a spectral resolution less
          than 50nm and signal-to-noise ratio greater than 2.
    \item The ability to automatically feed water into the garden bed.
    \item Serve data to the user.
 \end{enumerate}
-Moving on, the team had goals they hoped to accomplish:
+Moving on, the team had Optional Goals:
 \begin{enumerate}
    \item Power the garden bed completely from solar and battery power.
    \item Serve data to the user via a website.
 \end{enumerate}
 \section{High-Level Design}
-Based on the goals listed in \autoref{sec:goals} this section will discuss the high-level thought
+Based on the goals listed above this section will discuss the high-level thought
 process the team undertook in achieving those goals.
 \begin{figure}[H]
     \centering
@@ -107,23 +114,31 @@ process the team undertook in achieving those goals.
     \label{fig:flowchart}
     \caption{The large systems and their interfaces and submodules}
 \end{figure}
-Figure \ref{fig:flowchart} the actor is any user. The team labelled both UART and WiFi blocks as interfaces to the user
-because as of the time of writing, the web server is not serving live data. In the figure, sensing is used interchangeably with spectrometer.
+The actor is any user. The team labelled both UART and WiFi blocks as interfaces to the user
+because as of the time of writing, the web server is not serving live data. In the figure, sensing is used 
+interchangeably with spectrometer.
 \subsection{Controller Subsystem}
 
 % Why the MCU connects to the internet
-In order for our system to be as self and power efficient as possible from an end-user perspective, our team decided to use a low-power, Internet-of-Things (IoT)-focused wireless microcontroller. To make the process of operating our product as hands-off as possible to end-users, the microcontroller will operate in Access Point (AP) mode to serve information to the user's mobile device. Our product will not produce or receive large amounts of data, or need complicated control schema for our various subsystems---and with power budget being a major concern of ours, our team needed to choose a product that would fit the bill.
+In order for our system to be as self and power efficient as possible from an end-user perspective, our 
+team decided to use a low-power, Internet-of-Things (IoT)-focused wireless microcontroller. To make the 
+process of operating our product as hands-off as possible to end-users, the microcontroller will operate 
+in Access Point (AP) mode to serve information to the user's mobile device. Our product will not produce 
+or receive large amounts of data, or need complicated control schema for our various subsystems---and with 
+power budget being a major concern of ours, our team needed to choose a product that would fit the bill.
 \subsection{Spectrometer} 
-In most instances, spectrometers are designed using charged couple devices in an array which some
-component such as a prism or diffraction grating will shine upon breaking the source into its
-components. This approach would be prohibitively expensive for such a consumer-oriented garden
-bed. The solution was to use either a photodiode or photoresistor to measure the magnitude of the
-of optical power in a given area\cite{Cao}. This sensor could be moved in order to give the effect of shining
-the source on an array with the only major downside being the duration needed to scan. Find below a 
-generalized block diagram for how this subsystem works.
+The spectrometer employs a small tungsten bulb to cover the spectral range of interest. Light from the bulb 
+is directed onto the soil and scattered into a fiber collimator. The collimating head couples the light into 
+a fiber patch cable, which guides the light into the dark spectrometer housing. There it is reflected off a 
+diffraction grating and focused onto two photodiodes. One Si photodiode covers the visible range, one InGaAs 
+covers the near infrared range. These are held in position by a linear rail actuator. The current from the 
+diodes is amplified and converted to voltage so that it can be detected, then the microcontroller records the 
+amplitude of the signal and the position of the photodiode. The spectral data is then applied to the board logic 
+for control, as well as sent to the user for display. See below for a diagram showing the path of information 
+through the system.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{images/OpticsBlockDiagram.png}
+    \includegraphics[width=\linewidth]{images/Schematic Diagram 2.png}
     \label{fig:sensing-block}
     \caption{Diagram showing the major components of the sensing subsystem.}
 \end{figure}
@@ -135,18 +150,10 @@ subsystems.
 The Texas Instruments CC3220-series (hence referred to as the "CC3220", the "MCU", or the "microcontroller") of microcontrollers are WiFi-enabled chips with an ARM Cortex-M4 central processor and a WiFi network processor, along with many useful peripherals and power management modules. This series of processors is delivered alongside a software development kit (SDK) provided by Texas Instruments to ease the development of IoT applications. The CC3220 is capable of running on bare metal, or with a Real-time Operating System (RTOS), allowing us to organize and schedule our various tasks.
 
 The CC3220's WiFi network processor (NWP) supports 802.11b/g/n, SmartConfig provisioning, IPv4 and IPv6. The NWP also as the ability to host an internal HTTP/HTTPS server, and contains its own filesystem.
-\subsection{Photosensitive device}
-The first major decision regarding components comes down to the choice between using a photodiode versus
-a photoresistor. The main advantage to photodiodes is their increased sensitivity. These means that with a lower
-optical power on the photosensitive surface, the electrical output should be higher by comparison to the photoresistor.
-This is a large consideration when understanding that soil will have a very low albedo (fraction of light a surface reflects)
-which means that every photon that hits the detector needs to have an effect.
-Thus the team chose two different photodiodes, the BPX 61 for the visual spectrum, and an InGaAs photodiode from Thor labs
-for near-infrared light.
+\subsection{Photodetectors}
+When selecting a photodetector, the relevant concerns were sensitivity, effective area, and cost. Si photodiodes are cheap and reliable. Our team selected the BPX 61 by Newark, since it was the cheapest model and met our needs. The near infrared device required more careful selection. Many infrared photodetectors are used for high speed communications, with minimal surface areas and optimized rise times. Due to our concerns over signal to noise ratio, we opted for a model with a large effective area, the Thorlabs 0800-3111-011.
 \subsection{Light source}
-The selection of the light source is important in that the light source needs to emit the wavelengths
-of light to be measured in roughly equal quantities. Based on the team's research tungsten lamps are a good source
-of broad spectrum light especially at optical power levels with respect to the necessary electrical input.
+Tungsten bulbs emit a broad spectrum, far into the infrared. They also come in small package sizes that emit a lot of light for reasonable power consumption. Our bulb, the Osram 54262 runs at 20 Watts of electrical power. This is supplied directly from the battery, though controlled by the microcontroller. The result is 350 lumens, mostly directed onto the soil.
 \subsection{Linear Rail}
 Referring to our high-level design, the team needed a linear rail with a sled that the sensors could be mounted to.
 The team found such a device on Amazon.
