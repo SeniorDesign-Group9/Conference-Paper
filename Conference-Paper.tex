@@ -136,7 +136,6 @@ generalized block diagram for how this subsystem works.
 \end{figure}
 \section{Major Components} \label{sec:major-components}
 The components found in this section make up the logical boundaries between systems and their
-subsystems.
 % How the MCU connects to the internet (local network, LAN -> NAT -> WAN, TCP stack)
 \subsection{Microcontroller}
 In order for our system to be as self and power efficient as possible from an end-user perspective, our team decided to use a low-power, Internet-of-Things (IoT)-focused wireless microcontroller. To make the process of operating our product as hands-off as possible to end-users, the microcontroller operates in Access Point (AP) mode to serve information to the user's mobile device. Our product will not produce or receive large amounts of data, or need complicated control schema for our various subsystems---and with power budget being a major concern of ours, our team needed to choose a product that would fit the bill.
@@ -255,16 +254,12 @@ A revised PCB (seen in \ref{fig:mcu_pcb_v2}) was designed using the module versi
    \includegraphics[width=\linewidth]{images/mcu_pcb_v2.jpg}
    \caption{Version 2 of the MCU PCB.}
 \end{figure}
-subsystems. 
-<<<<<<< HEAD
 \subsection{Power Subsystem} \label{sec:power-subsystem}
 The components that make up this subsystem in all are the battery, solar panels, voltage regulators, 
 and the charge controller. These components together also make our system operate working with other 
 subsystems but also helping the other subsystems work together as well. 
 
-=======
 \subsection{Battery} \label{sec:battery}
->>>>>>> b8e9a7e (Changed format of power portion of major components)
 Solely, to make any product or system to operate, power is needed in some type of form. DC power 
 connectors, batteries, connection to a direct source, there are many different ways to obtain power 
 in order for something to operate. DC power connectors have always been around and have been used 
@@ -327,6 +322,10 @@ regulators are connected to the rest of the other componets, powering them with 
 PCB, we designed it with three different voltage regulators, to output three different voltages. This is then 
 distrubuted to the proper components.
 
+subsystems. 
+\section{Hardare Detail}
+In \autoref{sec:major-components}, a high level overview of components and features were given. This
+section will discuss the implementation details of the chosen components.
 \section{Software Detail}
 The microntroller serves as the glue holding this design together. In this section the means of
 integrating the various subsystems via software will be discussed.
