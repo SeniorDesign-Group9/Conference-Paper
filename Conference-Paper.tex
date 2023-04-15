@@ -13,125 +13,134 @@
 \begin{document}
 
 \begin{center}
-   \Large Garden Automated Rain/Daylight Executed by Near-Infrared Sensing \break
+	\Large Garden Automated Rain/Daylight Executed by Near-Infrared Sensing \break
 
-   \large Nicholas Chitty, Brendan College, Scott Peirce, Justin Pham-Trinh \break
+	\large Nicholas Chitty, Brendan College, Scott Peirce, Justin Pham-Trinh \break
 
-   \large University of Central Florida, Dept. of Electrical and Computer Engineering, Orlando,
-   Florida, 32816-2450
+	\large University of Central Florida, Dept. of Electrical and Computer Engineering, Orlando,
+	Florida, 32816-2450
 \end{center}
 
 \begin{abstract}
-   This paper will show the application of near infrared spectroscopy 
-and how it can measure electromagnetic waves from the emission of soil. Near infrared spectroscopy 
-is an absorption spectroscopy method that can help determine the chemical composition of a 
-substance through the radiation the substance gives off. Soil itself is a mixture of organic and 
-inorganic substances that all together directly contribute to a garden’s environment. We are 
-starting with soil with unknown qualities, so comparisons will be made between our soil and soil 
-of known qualities to match and ensure that our plant is in a healthy and suitable environment. 
+	This paper will show the application of near infrared spectroscopy
+	and how it can measure electromagnetic waves from the emission of soil. Near infrared spectroscopy
+	is an absorption spectroscopy method that can help determine the chemical composition of a
+	substance through the radiation the substance gives off. Soil itself is a mixture of organic and
+	inorganic substances that all together directly contribute to a garden’s environment. We are
+	starting with soil with unknown qualities, so comparisons will be made between our soil and soil
+	of known qualities to match and ensure that our plant is in a healthy and suitable environment.
 \end{abstract}
 
 \section{Introduction}
-\IEEEPARstart{I}{n} the past year, we have seen a great increase in remote sensing, wireless 
-communication, API integration, and so much more. All of which have been made more available and 
+\IEEEPARstart{I}{n} the past year, we have seen a great increase in remote sensing, wireless
+communication, API integration, and so much more. All of which have been made more available and
 economical. The internet has also seen its share of ``DIY" projects and its continuing growth.
 
-In the agriculture industry, there have been new advancements in technology with high performance 
+In the agriculture industry, there have been new advancements in technology with high performance
 water distribution, network communication, and remote sensing. This research is intended to advance
-the field by producing a system that can maintain a suitable environment for a plant to grow. In the 
-environment, there will be sensors that will help modify the conditions within the environment. In 
-addition to this system, it will feature a web interface for notifications and the ability for the 
+the field by producing a system that can maintain a suitable environment for a plant to grow. In the
+environment, there will be sensors that will help modify the conditions within the environment. In
+addition to this system, it will feature a web interface for notifications and the ability for the
 user to set settings.
 
-Monitoring soil isn't always the most fun or the easiest task, because things could get dirty or we 
-might forget about our plant. This project will feature an on-the-rise technology in the form of a 
-spectrophotometer. Smart systems nowadays are big learning machines that are constantly aware of its 
-surroundings. For a smart agricultural system, it would need to determine variables such as moisture 
-levels, nutrient content, pH levels, and so much more. This paper will introduce near infrared 
-spectroscopy as another method to soil sensing that may prove to be more beneficial over traditional 
+Monitoring soil isn't always the most fun or the easiest task, because things could get dirty or we
+might forget about our plant. This project will feature an on-the-rise technology in the form of a
+spectrophotometer. Smart systems nowadays are big learning machines that are constantly aware of its
+surroundings. For a smart agricultural system, it would need to determine variables such as moisture
+levels, nutrient content, pH levels, and so much more. This paper will introduce near infrared
+spectroscopy as another method to soil sensing that may prove to be more beneficial over traditional
 products or techniques.
 
-This project will also present other fields such as system controls, power, and web, all to provide 
-a "set it and forget it" home gardening experience. A home gardening experience where the garden bed 
-can communicate with the user and the user can provide instruction of what to do, but also at the 
+This project will also present other fields such as system controls, power, and web, all to provide
+a "set it and forget it" home gardening experience. A home gardening experience where the garden bed
+can communicate with the user and the user can provide instruction of what to do, but also at the
 core, this is a microcontroller project that anybody can do with just slight knowledge and understanding
-of digital communications. Like any smart device too, the internet plays an important role in making 
-this as hands-off as it can be. There are many different communication protocols such as Bluetooth, 
-Zigbee, Thread, and even short-range/long-range protocol. For this project we decided to go with WiFi 
-because of its decreased bandwidth and that we aren't expecting to produce or receive large amounts 
-of data. 
+of digital communications. Like any smart device too, the internet plays an important role in making
+this as hands-off as it can be. There are many different communication protocols such as Bluetooth,
+Zigbee, Thread, and even short-range/long-range protocol. For this project we decided to go with WiFi
+because of its decreased bandwidth and that we aren't expecting to produce or receive large amounts
+of data.
 
-An important aspect to a lot of devices as well is data storage and web usage. This is important so 
-that we can look back on previous information and make observations and conclusions. With our 
+An important aspect to a lot of devices as well is data storage and web usage. This is important so
+that we can look back on previous information and make observations and conclusions. With our
 microcontroller, the web system is going to communicate with it through transmission control protocol.
-Transmission control protocol is a standard on how to establish and maintain a network connection to 
-exchange data. The web system will also have 16gb database to store data and have the ability to support 
-multiple garden beds in a scaled solution. As mentioned before, the web system will have a feature to 
-allow the user to set settings but also read the data that is stored. Lastly, an important factor to 
-any garden is the weather and knowing when it might be cold, hot, or even rain outside. As a part of 
-our web system, it will communicate using HTTP requests with a weather service to receive updates on 
+Transmission control protocol is a standard on how to establish and maintain a network connection to
+exchange data. The web system will also have 16gb database to store data and have the ability to support
+multiple garden beds in a scaled solution. As mentioned before, the web system will have a feature to
+allow the user to set settings but also read the data that is stored. Lastly, an important factor to
+any garden is the weather and knowing when it might be cold, hot, or even rain outside. As a part of
+our web system, it will communicate using HTTP requests with a weather service to receive updates on
 the weather.
 
-Solar power has been a growing source of energy for the past years and still continues to be with new 
-developments and breakthroughs with solar technology. A lot of systems nowadays are solar powered but 
-these products are not constantly in use, they have to turn of eventually. When the product is off the 
-solar panel can still collect energy which is stored in a battery for conservation. In this paper, we 
+Solar power has been a growing source of energy for the past years and still continues to be with new
+developments and breakthroughs with solar technology. A lot of systems nowadays are solar powered but
+these products are not constantly in use, they have to turn of eventually. When the product is off the
+solar panel can still collect energy which is stored in a battery for conservation. In this paper, we
 will demonstrate our system running independently, battery powered but charged through solar panels.
 
-In all, this paper will present how near infrared spectroscopy can be used to monitor a plant's environment 
-and notify users with information of its health. Generating and guiding electromagnetic waves into a 
-housing, scanning the substance, and then converting this optical power into a voltage that can be 
-read and analyzed. It is then the microcontroller will communicate with the web system, storing the 
-information and deciding on if anything needs to be done and notifying the user. 
+In all, this paper will present how near infrared spectroscopy can be used to monitor a plant's environment
+and notify users with information of its health. Generating and guiding electromagnetic waves into a
+housing, scanning the substance, and then converting this optical power into a voltage that can be
+read and analyzed. It is then the microcontroller will communicate with the web system, storing the
+information and deciding on if anything needs to be done and notifying the user.
 
 \subsection{Goals} \label{sec:goals}
 The following are the goals the team set for themselves with this project. Starting with non-
 negotiable goals:
 \begin{enumerate}
-   \item A spectrometer that operates in the 400nm to 1700nm band with a spectral resolution less
-         than 50nm and signal-to-noise ratio greater than 2.
-   \item The ability to automatically feed water into the garden bed.
-   \item Serve data to the user.
+	\item A spectrometer that operates in the 400nm to 1700nm band with a spectral resolution less
+	      than 50nm and signal-to-noise ratio greater than 2.
+	\item The ability to automatically feed water into the garden bed.
+	\item Serve data to the user.
 \end{enumerate}
 Moving on, the team had goals they hoped to accomplish:
 \begin{enumerate}
-   \item Power the garden bed completely from solar and battery power.
-   \item Serve data to the user via a website.
+	\item Power the garden bed completely from solar and battery power.
+	\item Serve data to the user via a website.
 \end{enumerate}
 \section{High-Level Design}
 Based on the goals listed in \autoref{sec:goals} this section will discuss the high-level thought
 process the team undertook in achieving those goals.
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\linewidth]{images/Flowchart.png}
-    \label{fig:flowchart}
-    \caption{The large systems and their interfaces and submodules}
+	\centering
+	\includegraphics[width=\linewidth]{images/Flowchart.png}
+	\label{fig:flowchart}
+	\caption{The large systems and their interfaces and submodules}
 \end{figure}
 Figure \ref{fig:flowchart} the actor is any user. The team labelled both UART and WiFi blocks as interfaces to the user
 because as of the time of writing, the web server is not serving live data. In the figure, sensing is used interchangeably with spectrometer.
-\subsection{Controller Subsystem}
 
-% Why the MCU connects to the internet
-In order for our system to be as self and power efficient as possible from an end-user perspective, our team decided to use a low-power, Internet-of-Things (IoT)-focused wireless microcontroller. To make the process of operating our product as hands-off as possible to end-users, the microcontroller will operate in Access Point (AP) mode to serve information to the user's mobile device. Our product will not produce or receive large amounts of data, or need complicated control schema for our various subsystems---and with power budget being a major concern of ours, our team needed to choose a product that would fit the bill.
+\subsection{Controller Subsystem}
+The controller subsystem would handle all of the I/O between each subsystem, control other ICs, record and store sensing data, as well as command and control the overall system. It would need to perform these actions while only sipping power from our battery, and have wireless capability. A real-time operating system (RTOS) would be needed to schedule and supervise the tasks needed to operate a spectrometer, tend to the user's flora, and communicate with the user and APIs wirelessly. All of this is relatively low-cost, this owed to the fact that no data processing will take place on-board the controller subsystem. The controller will command the sensing subsystem to send it data, and simply store this data to be interpreted at a later time.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=\linewidth]{images/control-block-diagram.png}
+   \label{fig:control-block-diagram}
+   \caption{Controller subsystem block diagram.}
+\end{figure}
+
 \subsection{Spectrometer} 
 In most instances, spectrometers are designed using charged couple devices in an array which some
 component such as a prism or diffraction grating will shine upon breaking the source into its
 components. This approach would be prohibitively expensive for such a consumer-oriented garden
 bed. The solution was to use either a photodiode or photoresistor to measure the magnitude of the
 of optical power in a given area\cite{Cao}. This sensor could be moved in order to give the effect of shining
-the source on an array with the only major downside being the duration needed to scan. Find below a 
+the source on an array with the only major downside being the duration needed to scan. Find below a
 generalized block diagram for how this subsystem works.
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\linewidth]{images/OpticsBlockDiagram.png}
-    \label{fig:sensing-block}
-    \caption{Diagram showing the major components of the sensing subsystem.}
+	\centering
+	\includegraphics[width=\linewidth]{images/OpticsBlockDiagram.png}
+	\label{fig:sensing-block}
+	\caption{Diagram showing the major components of the sensing subsystem.}
 \end{figure}
 \section{Major Components} \label{sec:major-components}
 The components found in this section make up the logical boundaries between systems and their
 subsystems.
 % How the MCU connects to the internet (local network, LAN -> NAT -> WAN, TCP stack)
 \subsection{Microcontroller}
+In order for our system to be as self and power efficient as possible from an end-user perspective, our team decided to use a low-power, Internet-of-Things (IoT)-focused wireless microcontroller. To make the process of operating our product as hands-off as possible to end-users, the microcontroller operates in Access Point (AP) mode to serve information to the user's mobile device. Our product will not produce or receive large amounts of data, or need complicated control schema for our various subsystems---and with power budget being a major concern of ours, our team needed to choose a product that would fit the bill.
+
 The Texas Instruments CC3220-series (hence referred to as the "CC3220", the "MCU", or the "microcontroller") of microcontrollers are WiFi-enabled chips with an ARM Cortex-M4 central processor and a WiFi network processor, along with many useful peripherals and power management modules. This series of processors is delivered alongside a software development kit (SDK) provided by Texas Instruments to ease the development of IoT applications. The CC3220 is capable of running on bare metal, or with a Real-time Operating System (RTOS), allowing us to organize and schedule our various tasks.
 
 The CC3220's WiFi network processor (NWP) supports 802.11b/g/n, SmartConfig provisioning, IPv4 and IPv6. The NWP also as the ability to host an internal HTTP/HTTPS server, and contains its own filesystem.
@@ -159,13 +168,45 @@ section will discuss the implementation details of the chosen components.
 \subsection{Spectrometer}
 The spectrometer is comprised of 5 major components, the photosensitive device, the linear rail and motor controller, the analog-to-digital converter, and the light source. The light source is connected via a Darlington transistor as it is driven with a 12V supply @ 1.7A. The darlington transistor will keep separate this electrical supply from the digital logic to control the lamp. The light source is fed into a fiber optic cable and pointed at a patch of soil which will reflect light into a secondary fiber optic cable.
 This project involves a large diffuse source, the illumined soil. The Fiber collimator will be attached to the fiber cable via their SMA connectors, then the collimator will be set in an acrylic block so that it rests 8.06mm above the soil. The block will also have a slot for the Light source to illuminate the soil at an angle, similar to the arrangement of the source and sensor in a computer mouse above a mousepad.
-The signal will travel through the fiber and up into the spectrometer housing, where the other connector of the cable will be mounted in place. Another collimator will take the output beam and collimate it so that it propagates through free space into the housing. The collimator has an output beam diameter of 1.7mm. This planar wavefront will strike the diffraction grating.
-We will call to the first optic cable as the source, and the second cable as the signal. From the signal cable, the light is transmitted onto a diffraction grating. This diffraction grating will split all the wavelengths of light across a rotational area of 47\textdegree. At this point, the team can do simple trigonometry to translate a linear position to a range of wavelengths being scanned. The team chose for the sensor to be at a distance of 30mm from the diffraction grating. 
+
+The beam coming out of the fiber will have a nonzero width. When the 1.7mm diameter beam hits the surface of the grating, since the grating is at 45 degrees from the beam, light will be propagating from an area with a diameter larger than 1.7mm.
+
+\begin{equation}
+    1.7mm/cos(45) = 2.4mm
+\end{equation}
+
+This means the spread of the diffracted light will be 38 degrees in and 21 degrees out from both the near edge and the far edge of the collimated beam on the surface of the grating. In order to capture this light and sort it so that the scanner can proceed linearly through each band, we will need a focusing optic that covers the full angular range.
+
 \begin{figure}[H]
+    \caption{Basic Ray Trace}
     \centering
-    \includegraphics[width=\linewidth]{images/DiffractionAngleCalculator.png}
-    \label{fig:diffraction-angle}
-    \caption{The diffraction angle of 1st through 3rd order diffractions.}
+    \includegraphics[width=0.75\linewidth]{images/BasicRayTrace.png}
+\end{figure}
+
+\paragraph{Focusing Lens} The diffraction grating will diverge the beam away from the sensor surface. This divergence can be corrected with a lens, focusing the divergent light to a spot the size of the sensor or smaller. There are two lens designs that could work, spherical and cylindrical. Spherical lenses are polished with a radius of curvature along both the horizontal and vertical axes. The advantage of a spherical lens is that they are generally cheaper to manufacture and available in a wider variety of sizes and shapes. The spot size of a circular beam passing through a spherical lens will be determined by the distance from the focal length, and the spot will be circular. Cylindrical lenses are cut with a radius of curvature along the horizontal axis, but flat along the vertical axis. A circular beam that passes through a cylindrical lens will be focused to the shape of an ellipse, allowing for more vertical flexibility of alignment. Plano-cylindrical lenses offer another advantage, they have a flat bottom, perpendicular to their planar back. This means they can be stood upright and pressed against a flat surface, dramatically reducing the complexity of the optical mount required to hold them in place. Unfortunately, cylindrical lenses are a specialty part with a smaller market, due to their elliptical focusing pattern, and this turned out to make them cost prohibitive for the project. The dimensions and position of the lens are determined by two things, the angular range of the spatially separated beams coming off the reflective diffraction plate, and the width of the scanning region. 
+
+\begin{figure}[H]
+    \caption{Sensor Ray Trace}
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/ColimatedBeam.png}
+\end{figure}
+
+The lens is also constrained by the angle and width of the input beam, as shown in the ray trace below. If the width of the lens comes within a few wavelengths of the beam approaching the diffraction plate, the beam will diffract around its edge. The size of the detector is 1.36mm across, and the beam needs to be focused from the full angle of about 60 degrees. This means the lens needs an effective focal length of approximately 50mm. In order to prevent the input beam from clipping on the lens, its diameter or height must be at most 30mm, just over 1 inch. 
+
+\begin{figure}[H]
+    \caption{Ray Trace of Diffraction Grating}
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/Zemax Ray Trace.png}
+\end{figure}
+\paragraph{Linear Actuator Rail} The sensors will be mounted to a carriage that may slide back and forth on the linear rail. The position of the carriage on the linear rail determines the wavelength of light sampled, and therefore the wavelength can be interpolated by the position of the stepper motor controlling the spectrometer carriage. It is a natural conclusion that the microcontroller will be able to direct the spectrometer to measure a specific wavelength by moving the stepper motor a certain number of predetermined steps. The microcontroller will sample the entire spectral range and compile this data to prepare to send to the web subsystem for processing. Since the other optics are solid-state, the position of the endmost beam will be fixed at or just outside of the fully retracted state of the rail. Since the rail makes 5um steps, and the arrangement and size of the beams are flexible, the spectrometer will be aligned such that the stepper motor will make the same number of steps every time, until the maximum range is reached. \break
+
+The signal will travel through the fiber and up into the spectrometer housing, where the other connector of the cable will be mounted in place. Another collimator will take the output beam and collimate it so that it propagates through free space into the housing. The collimator has an output beam diameter of 1.7mm. This planar wavefront will strike the diffraction grating.
+We will call to the first optic cable as the source, and the second cable as the signal. From the signal cable, the light is transmitted onto a diffraction grating. This diffraction grating will split all the wavelengths of light across a rotational area of 47\textdegree. At this point, the team can do simple trigonometry to translate a linear position to a range of wavelengths being scanned. The team chose for the sensor to be at a distance of 30mm from the diffraction grating.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{images/DiffractionAngleCalculator.png}
+	\label{fig:diffraction-angle}
+	\caption{The diffraction angle of 1st through 3rd order diffractions.}
 \end{figure}
 
 It is at this point that the spectrometer design enters the electrical domain. Due to the
@@ -175,11 +216,11 @@ analog-to-digital converter. The primary issue at this point is just how small t
 the light is. Given that the sensors have a translation of 1nA/1mW of power, we needed to design a
 high gain, low noise converter. We chose 100e6 for the gain meaning that 1nA would translate to
 100mV which is over double the resolution of our 16-bit ADC.
-\begin{figure}[H]
-    \centering
-    \includegraphics[height=.25\textheight]{images/SensorSchematics.PNG}
-    \label{fig:sensor-schematic}
-    \caption{The schematics for the current-to-voltage converter.}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=.9\linewidth]{images/SensorSchematics.PNG}
+	\label{fig:sensor-schematic}
+	\caption{The schematics for the current-to-voltage converter.}
 \end{figure}
 The net labelled \verb|V_NIR| and \verb|V_VIS| are sandwiched between ground planes on their track
 to the ADC to reduce noise caused by electrostatic discharge or other analog signals (such as the
@@ -188,52 +229,62 @@ the noise above 60Hz. The value of 60Hz was chosen as the cut off frequency beca
 testing the oscilloscope showed a signal frequency in that range that would be detrimental to the
 readings.
 
-The sensing subsystem contains a Texas Instruments ADS 7142 ADC. The ADS 7142 is an IoT-focused nanowatt ADC with 2 external channels, an I2C interface, a sampling frequency of 140ksps, and an effective resolution of 16 bits in High-precision Mode. This ADC will be able to measure between 0 and 3.3 V from the output of the sensing subsystem's  photodiode op-amp circuit.
+The sensing subsystem contains a Texas Instruments ADS 7142 ADC. The ADS 7142 is an IoT-focused nanowatt ADC with 2 external channels, an I2C interface, a sampling frequency of 140ksps, and an effective resolution of 16 bits in High-precision Mode. This ADC is able to measure between 0 and 3.3 V from the output of the sensing subsystem's photodiode op-amp circuit.
 
 % How the MCU gets data from sensors (ADC, cont.)
-It is expected that each photodiode's circuit will provide a voltage of between 0 and 3.3 V. The 16-bit ADC provides for an input of the same range. Therefore, the resolution of the ADC is calculated below:
+Each photodiode's circuit produces a voltage between 0 and 3.3 V. The 16-bit ADC provides for an input of the same range, therefore, the resolution of the ADC is calculated below:
 \begin{equation}
-    \frac{(3.3 - 0)\,\mathrm{V}}{2^{16}\,\mathrm{steps}} =
-    50.35\,\mathrm{\mu V}/\mathrm{step}
+	\frac{(3.3 - 0)\,\mathrm{V}}{2^{16}\,\mathrm{steps}} =
+	50.35\,\mathrm{\mu V}/\mathrm{step}
 \end{equation}
-These steps will be used to measure OH composition and nutrients in the soil. The MCU will directly control GPIO and bit-bang values to the stepper motor controlling the position of the photodiodes allowing them to measure the full range of spectral values.
-\subsection{Printed Circuit Board} Our controller subsystem was developed and implemented on a Texas Instruments LaunchPad development board. An initial control printed circuit board (PCB) was designed, fabricated, and assembled (partially seen in \ref{fig:mcu_v1_cpwg}). The chip version of the CC3220 (CC3220S) was used requiring a 4-layer impedance-controller PCB, with waveguide and external antenna, as well as oscillators, numerous bypass capacitors, and inductors. A revised PCB was designed using the module version of the CC3220 (CC3220MODAS). The PCB design was simplified, requiring only a few bypass capacitors instead of the numerous other components to support the microcontroller found on the first revision of the board.
+These steps are used to measure OH composition and nutrients in the soil. The MCU directly controls GPIO and bit-bang values to the stepper motor controlling the position of the photodiodes allowing them to measure the full range of spectral values.
+\subsection{Printed Circuit Board} Our controller subsystem was developed and implemented on a Texas Instruments LaunchPad development board. An initial control printed circuit board (PCB) was designed, fabricated, and assembled (partially seen in \ref{fig:mcu_v1_cpwg}). The chip version of the CC3220 (CC3220S) was used requiring a 4-layer impedance-controller PCB, with waveguide and external antenna, as well as oscillators, numerous bypass capacitors, and inductors.
 
 \begin{figure}[H]
-    \centering
-    \label{fig:mcu_v1_cpwg}
-    \includegraphics[width=\linewidth]{images/mcu_v1_cpwg.jpg}
-    \caption{The coplanar waveguide designed to carry a 2.4 GHz signal surrounded by via fencing.}
+   \centering
+   \label{fig:mcu_v1_cpwg}
+   \includegraphics[width=\linewidth]{images/mcu_v1_cpwg.jpg}
+   \caption{The coplanar waveguide designed to carry a 2.4 GHz signal surrounded by via fencing.}
 \end{figure}
+
+A revised PCB (seen in \ref{fig:mcu_pcb_v2}) was designed using the module version of the CC3220 (CC3220MODAS). The PCB design was simplified, requiring only a few bypass capacitors instead of the numerous other components to support the microcontroller found on the first revision of the board. All other components found on the first version of the board were kept (e.g. molex connectors, LEDs, JTAG connector, FT234XD, etc.). In addition, pinouts were added for GPIO, I2C, and power to aid in debugging.
+
+\begin{figure}[H]
+   \centering
+   \label{fig:mcu_pcb_v2}
+   \includegraphics[width=\linewidth]{images/mcu_pcb_v2.jpg}
+   \caption{Version 2 of the MCU PCB.}
+\end{figure}
+
 \section{Software Detail}
 The microntroller serves as the glue holding this design together. In this section the means of
 integrating the various subsystems via software will be discussed.
 \subsection{Development Model}
 An Agile development model was used to program the control subsystem and its various modules. Code reviews were performed on an as-needed basis by a convening of members of the MCU subsystem and the web subsystem teams. Texas Instruments Code Composer Studio v12 was used to program, compile (via TI ARM compiler v20), and debug the C++-based project. GitHub was used as a repository for the project, using GNU Git for version control.
 
-The Meyers' Singleton design pattern was used for most of the classes found in our project repository (e.g. for our water solenoid class as seen in \ref{fig:singleton_implementation}). Because our team is using a RTOS with a scheduler and threads, we are using that to our advantage to divide and schedule tasks for the different submodules of our project. However, one problem our team took into consideration is that there is was only one physical instance of each submodule. The normal Singleton pattern traditionally has been used when one wants only one instance of a class initialized at any one point, but they are not thread-safe. One variation of this pattern is the Meyers' Singleton, which guarantees that only one instance of a type is available at any time. Initialization of this pattern is thread-safe, and locks can be used to ensure thread safety when accessing members of the class. This is accomplished by using a static local variable inside a static member function to hold a single instance of the class. The Meyers' Singleton takes advantage of the fact that the initialization of static local variables inside functions is guaranteed to be thread-safe. The Meyers' Singleton disallows copying and moving of the class, and makes member constructors and destructors private.
+The Meyers' Singleton design pattern was used for most of the classes found in our project repository (e.g. for our water solenoid class as seen in \ref{fig:singleton_implementation}). Because our team is using a RTOS with a scheduler and threads, we are using that to our advantage to divide and schedule tasks for the different submodules of our project. However, one problem our team took into consideration is that there is was only one physical instance of each submodule. The normal Singleton pattern traditionally has been used when one wants only one instance of a class initialized at any one point, but they are not thread-safe. One variation of this pattern is the Meyers' Singleton, which guarantees that only one instance of a type is available at any time. Initialization of this pattern is thread-safe, and locks can be used to ensure thread safety when accessing members of the class. This is accomplished by using a static local variable inside a static member function to hold a single instance of the class. The Meyers' Singleton takes advantage of the fact that the initialization of static local variables inside functions is guaranteed to be thread-safe. The Meyers' Singleton disallows copying and moving of the class, and makes member constructors and destructors private\cite{Meyers}.
 
 % Code style
 \lstdefinestyle{mystyle}{
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=-15pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=-15pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
 }
 \lstset{style=mystyle}
 
 \begin{figure}
-    \centering
-    \label{fig:singleton_implementation}
+	\centering
+	\label{fig:singleton_implementation}
 
-\begin{lstlisting}[language=C++]
+	\begin{lstlisting}[language=C++]
     class Water { 
         public:
             static Water& instance();
@@ -255,50 +306,57 @@ The Meyers' Singleton design pattern was used for most of the classes found in o
             // Class variables
     };
 \end{lstlisting}
-\caption{An example of the Meyers' Singleton pattern implementation within the project.}
+	\caption{An example of the Meyers' Singleton pattern implementation within the project.}
 \end{figure}
 \subsection{Data} As well as being able to see and configure the network settings of the product, the user will be able to see data relating to the OH-levels and common plant nutrient levels as determined by the spectral analysis of the product. For one measurement, our team will need to store 16 bits of data per position from 130 unique positions, per sensor.
 \begin{equation}
-    \frac{16\,\mathrm{b}}{8\,\mathrm{b/B}}\times 130\,\mathrm{positions} \times 2\,\mathrm{sensors} = 520\,\mathrm{B}
+	\frac{16\,\mathrm{b}}{8\,\mathrm{b/B}}\times 130\,\mathrm{positions} \times 2\,\mathrm{sensors} = 520\,\mathrm{B}
 \end{equation}
 With 8 Mb of the 32 Mb (1 MiB of the 4 MiB) shared serial flash dedicated to storing results, this allows us to store 2016 measurements.
 \begin{equation}
-    \frac{1\,\mathrm{MiB}}{520\,\mathrm{B/measurement}} = 2016\,\mathrm{measurements}
+	\frac{1\,\mathrm{MiB}}{520\,\mathrm{B/measurement}} = 2016\,\mathrm{measurements}
 \end{equation}
 Stretching out measurements to be recorded every 15 minutes, this will allow a user to see individual measurements stretching back exactly three weeks.
 \begin{equation}
-    2016\,\mathrm{measurements} \times \frac{1\,\mathrm{measurement}}{15\,\mathrm{min}} = 30240\,\mathrm{min} 
+	2016\,\mathrm{measurements} \times \frac{1\,\mathrm{measurement}}{15\,\mathrm{min}} = 30240\,\mathrm{min}
 \end{equation}
 As a stretch goal these measurements can be aggregated and analyzed, and allow us to serve trends and predictions to the user.
 
-\subsection{Low Power Modes} The system shall run in active mode between sunrise and sunset, while the battery has 40-100\% calculated charge remaining. The system shall run in low power mode between sunrise and sunset while the battery has 10-40\% calculated charge remaining, and between sunset and sunrise while the battery has 10-100\% calculated charge remaining. The system shall run in critical power mode while the battery has 5-10\% calculated charge remaining. The system shall be in shutdown mode while the battery has 0-5\% calculated charge remaining. The system shall be able to switch power modes within 5 seconds of the interrupt being triggered.
+\subsection{Software Logic Flow} 
+\begin{figure}[H]
+    \centering
+    \label{fig:logic-flow}
+    \includegraphics[width=\linewidth]{images/logic-flow.png}
+    \caption{Software logic flow diagram}
+\end{figure}
+
+The RTOS monitors 4 threads, each dealing with vital functions of the product. The first thread deals with the sensing subsytem and operating the spectrometer, as well as recording results. When a measurement is needed, the lamp is turned on and the spectrometer is stepped through every position to take a voltage reading that is placed in a struct. When the last measurement is taken, the light is turned off, the time is recorded in the struct, and the measurement struct is pushed to a queue. The HTTP server thread reads the results from the queue and posts them for the user to see. The power supervisor thread reads from the charge controller every minute. If it encouters an unsafe situation, it is able to command the system's power state to resolve the situation. Lastly, the water supervisor thread controls the water solenoid, turning it on and off according to parameters input by the user.
 
 \subsection{Connection}
-Our product shall be able to broadcast a WLAN in AP mode. This will allow the user to connect to the product's SSID. The user would then be directed to a web portal hosted by the MCU's internal HTTP server, where they will be able to view information and telemetry related to the product. Hosting a web interface would allow unanimous adaptation of our product for home users. The system shall be able to broadcast a WLAN in AP mode with a nominal signal strength of 6 dBm measured at the antenna. The network shall adhere to the standards of 802.11b, g, or n. 
+Our product broadcasts a WLAN in AP mode that allows the user to connect to the product. The user is then directed to a web portal hosted by the MCU's internal HTTP server, where they will be able to view information, sensing data, and telemetry related to the product. Hosting a web interface would allow unanimous adaptation of our product for home users.
 
 \subsection{Libraries}
-It should be expected that the C++ standard library (as defined in C++14) will be used, as well as the POSIX library, along with the Texas Instruments SimpleLink CC32xx SDK.
+The C++ standard library (as defined in C++14), the POSIX library, and the Texas Instruments SimpleLink CC32xx SDK were used for this project. No 3rd party libraries were used.
 
 % Parameters for connection and how often it tries
 \subsection{Weather API Implementation}
 As a stretch goal, the user will be able to configure the MCU in Station mode to allow it to connect to the user's home WLAN's SSID as a client. The user would still be able to access the MCU's web portal and see the same information as they had before. In addition, the MCU would be able to access an API to receive weather information and inform the user of recommended actions pertaining to their garden bed (e.g. if the system determines there will be freezing temperatures overnight, it may suggest to the user to cover the garden bed with a sheet or towel).
 \subsection{Motor Controller}
-Four GPIO lines will be used to control the stepper motor holding the sensing PCB (which includes the photodiodes, op-amp circuitry, ADC, motor controller, and connector). Depending on the digital values passed to the motor controller, the motor controller is able to control the movement direction and speed. Our team found that using the SimpleLink SDK's high-level hardware abstraction layer (HAL) provides too long of a delay when changing values in the four GPIO lines. Nanosecond-levels of delay were needed, rather than the microsecond levels of delay our team was seeing. Instead of using highly-abstracted APIs for control of the motor, our team got as close to hardware as is possible with C/C++ and used TI's driverlib driver library specifically for the CC3220. Instead of a simple GPIO number being passed to the function, our team had to determine the GPIO port and port-specific pin of each input of our motor controller. The driverlib function checks the port for correctness, and then performs a system call to write a value directly to memory (in our case, the address of the GPIO port). Using driverlib also allows us to bit stuff our GPIO pins if they are located on the same port---in our second iteration of the board, the motor controller GPIOs were relocated to the same GPIO port and bitmasks used so we can change all four GPIO pins with one driverlib write function. This allows us to toggle a single GPIO pin within a period of 350 ns (seen in \ref{fig:gpio_toggle_driverlib}). With a speed of 80 MHz in active mode, this would mean we're able to write to GPIO in only 28 processor cycles.
+Four GPIO lines are used to control the stepper motor holding the sensing PCB (which includes the photodiodes, op-amp circuitry, ADC, motor controller, and connector). Depending on the digital values passed to the motor controller, the motor controller is able to control the movement direction and speed. Our team found that using the SimpleLink SDK's high-level hardware abstraction layer (HAL) provides too long of a delay when changing values in the four GPIO lines. Nanosecond-levels of delay were needed, rather than the microsecond levels of delay our team was seeing. Instead of using highly-abstracted APIs for control of the motor, our team got as close to hardware as is possible with C/C++ and used TI's driverlib driver library specifically for the CC3220. Instead of a simple GPIO number being passed to the function, our team had to determine the GPIO port and port-specific pin of each input of our motor controller. The driverlib function checks the port for correctness, and then performs a system call to write a value directly to memory (in our case, the address of the GPIO port). Using driverlib also allows us to bit stuff our GPIO pins if they are located on the same port---in our second iteration of the board, the motor controller GPIOs were relocated to the same GPIO port and bitmasks used so we can change all four GPIO pins with one driverlib write function. This allows us to toggle a single GPIO pin within a period of 350 ns (seen in \ref{fig:gpio_toggle_driverlib}). With a speed of 80 MHz in active mode, this would mean we're able to write to GPIO in only 28 processor cycles.
 \begin{equation}
-    350\,\mathrm{ns} \times (80\times10^6\mathrm{cycles/s}) = 28\,\mathrm{cycles}
+	350\,\mathrm{ns} \times (80\times10^6\mathrm{cycles/s}) = 28\,\mathrm{cycles}
 \end{equation}
 This is a huge accomplishment for our team, especially with a program written in C++ and utilizing HAL.
 
 \begin{figure}[H]
-    \centering
-    \label{fig:gpio_toggle_driverlib}
-    \includegraphics[width=\linewidth]{images/gpio_toggle_driverlib.jpg}
-    \caption{Toggling GPIO using driverlib results in a very short (350 ns) delay.}
+	\centering
+	\label{fig:gpio_toggle_driverlib}
+	\includegraphics[width=\linewidth]{images/gpio_toggle_driverlib.jpg}
+	\caption{Toggling GPIO using driverlib results in a very short (350 ns) delay.}
 \end{figure}
 To drive a DC motor we similarly needed a device to separate the digital logic from the back emf of the motor. This is done through the use of the motor driver. The timing of the signals is the most important part as the driver is just using the current and voltage source designed specifically for the motor in the timings given by the input pins. Wrong timing leads to the ability to skip tests leading to indeterministic behavior. The issue is the the CC32xx SDK abstracts away a lot of the fine tunability of setting hardware registers. To resolve this, the team used the specific board's hardware driver implementation to set the output on the pins with a delay of only 28 cycles.
 \subsection{Over-the-Air Updates}
 At this time, our team does not intend to provide a method for over-the-air updates (OTA), however, this is a stretch goal that may be completed in the future.
 
-\subsection{Startup and Shutdown} Startup and shutdown will occur in a timely manner (within seconds). Abrupt shutdown shall not damage any components of the system, and the system will be able to restart to its previous state without any input from the user. If the system freezes or crashes, its internal watchdog timer will automatically reboot the device.
 \input{references/references.tex}
 \end{document}
