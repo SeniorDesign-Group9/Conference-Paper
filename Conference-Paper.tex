@@ -48,7 +48,7 @@ a broadband light source to probe the soil, then collect reflectance data using 
 Relevant spectral data is mostly contained within the near and mid infrared regimes. However, Moisture
 Content, Carbon, Phosphorous, and pH all have spectral fingerprints that can be detected within the visible
 and near infrared spectrum. A reflectance scanning spectrometer with a broadband source and one or two
-cheap detectors covering the 400-1700nm range are sufficient to measure these variables.
+cheap detectors covering the 400-1700nm range are sufficient to measure these variables\cite{Mouazen2007}.
 
 In addition to professional products and services, hobby project forums are also advancing the
 accessibility of complex systems. Hydroponic gardeners are experimenting with water distribution systems,
@@ -105,7 +105,9 @@ Moving on, the team had Optional Goals:
    \item Power the garden bed completely from solar and battery power.
    \item Serve data to the user via a website.
 \end{enumerate}
+
 \section{High-Level Design}
+
 Based on the goals listed above this section will discuss the high-level thought
 process the team undertook in achieving those goals.
 \begin{figure}[H]
@@ -155,33 +157,67 @@ When selecting a photodetector, the relevant concerns were sensitivity, effectiv
 \subsection{Light source}
 Tungsten bulbs emit a broad spectrum, far into the infrared. They also come in small package sizes that emit a lot of light for reasonable power consumption. Our bulb, the Osram 54262 runs at 20 Watts of electrical power. This is supplied directly from the battery, though controlled by the microcontroller. The result is 350 lumens, mostly directed onto the soil.
 \subsection{Linear Rail}
-Referring to our high-level design, the team needed a linear rail with a sled that the sensors could be mounted to.
-The team found such a device on Amazon.
+Referring to our high-level design, the team needed a linear rail with a sled that the sensors could be mounted to. The team found such a device on Amazon.
 \subsection{Water valve}
-As part of the goals, the team wanted to be able to control the flow of water
-into the plant bed. To accomplish this, they chose a solenoid valve whose rated pressure was well specificied for use with home water pressures.
-\section{Hardware Detail}
-In \autoref{sec:major-components}, a high level overview of components and features were given. This
-section will discuss the implementation details of the chosen components.
+As part of the goals, the team wanted to be able to control the flow of water into the plant bed. To accomplish this, they chose a solenoid valve whose rated pressure was well specificied for use with home water pressures.
+\section{Hardware Design}
+In \autoref{sec:major-components}, a high level overview of components and features were given. This section will discuss the implementation details of the chosen components.
 \subsection{Spectrometer}
-The spectrometer is comprised of 5 major components, the photosensitive device, the linear rail and motor controller, the analog-to-digital converter, and the light source. The light source is connected via a Darlington transistor as it is driven with a 12V supply @ 1.7A. The darlington transistor will keep separate this electrical supply from the digital logic to control the lamp. The light source is fed into a fiber optic cable and pointed at a patch of soil which will reflect light into a secondary fiber optic cable.
-This project involves a large diffuse source, the illumined soil. The Fiber collimator will be attached to the fiber cable via their SMA connectors, then the collimator will be set in an acrylic block so that it rests 8.06mm above the soil. The block will also have a slot for the Light source to illuminate the soil at an angle, similar to the arrangement of the source and sensor in a computer mouse above a mousepad.
-The signal will travel through the fiber and up into the spectrometer housing, where the other connector of the cable will be mounted in place. Another collimator will take the output beam and collimate it so that it propagates through free space into the housing. The collimator has an output beam diameter of 1.7mm. This planar wavefront will strike the diffraction grating.
-We will call to the first optic cable as the source, and the second cable as the signal. From the signal cable, the light is transmitted onto a diffraction grating. This diffraction grating will split all the wavelengths of light across a rotational area of 47\textdegree. At this point, the team can do simple trigonometry to translate a linear position to a range of wavelengths being scanned. The team chose for the sensor to be at a distance of 30mm from the diffraction grating. 
+Five components from the spectrometer required design: the light collection system, the diffraction grating, the cylindrical lens, the actuator rail, and the analog-to-digital converter. The system was complemented with other components, such as the housing and photodiodes, however their requirements were less strict and could be satisfied with minimal design beforehand. 
+\subsubsection{Light Collection}
+The light source is connected via a Darlington transistor and driven with a 12V supply at \~{}1.7A. This is too much electrical power for the digital controls on the board, the Darlington transistor will isolate this electrical supply. The light from the bulb shines on a patch of soil and reflects onto the fiber head collimator. In order to maximize the effect of reflectance on the sample, the bulb is seated in a reflective metal tube which shields reflections from entering the fiber head.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/Light Collection.png}
+    \label{fig:Light-Collection-Diagram}
+    \caption{Conical frame for reflecting the light off the soil}
+\end{figure}
+\subsubsection{Diffraction Grating}
+Reflective diffraction gratings disperse light at an angle proportional to wavelength according to the classic grating equation,
+\begin{equation}
+    m\lambda = d(sin\alpha + sin\beta)
+\end{equation}
+where m stands for diffraction order, $\lambda$ refers to wavelength, d refers to grating spacing in grooves/mm, and $\alpha$ and $\beta$ stand for input and output angles respectively. Below, the first three orders of diffraction are solved for a beam with wavelengths from 400nm to 1700nm on a grating with 600 grooves/mm. The model allows testing for beams at different incident angles. 50\textdegree \: from normal was optimal, since it allowed the first order reflection to spread widely without coming back into the incident beam. The dispersion covers 47\textdegree.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{images/DiffractionAngleCalculator.png}
     \label{fig:diffraction-angle}
-    \caption{The diffraction angle of 1st through 3rd order diffractions.}
+    \caption{The diffraction angle of 1st through 3rd order diffractions}
 \end{figure}
+\subsubsection{Cylindrical Lens}
+Light entering the spectrometer housing will exit the fiber patch cable through a collimator with matching numerical aperture. This expands the beam to a diameter of 1.7mm, shining a circular image away towards the diode rail. Ideally, the light would be focused to a point at the photodetector, where the optical power of a single wavelength would be measured. Instead, a large circle with \~{}1.7mm diameter will reach the rail. To fix this, a lens is positioned just far enough in front of the grating for the incident beam to clear its edge at 50\textdegree. The lens is cylindrical, focusing the light along the horizontal axis but not along the vertical axis. With the rail positioned right at the focal length of 50mm, the beam focuses neatly along the range of the photodetector.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/RayTrace.png}
+    \label{fig:housing-ray-trace}
+    \caption{Ray trace of the idealized beam path through the housing}
+\end{figure}
+The spot size of an idealized raytrace yields a neat 27 $\mu $m, with \~{}30$\mu $m between spot centers. This is excellent, since the airy disk suggested by the ray trace is within an order of magnitude. This means the arrangement of the components will not raise the lower limit of the spectral resolution above 2nm, although it is doubtful the nonideal system will achieve such precision. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/SpotDiagram.png}
+    \label{fig:spot-size-diagram}
+    \caption{Spot size diagram of three wavelengths focused at the linear rail}
+\end{figure}
+\subsubsection{Linear Rail Actuator}
+Given that there is \~{}30$\mu $m between the center of each focused wavelength spot, and wavelengths range from 400nm to 1700nm the minimum stroke length needed for the linear rail is:
+\begin{equation}
+    30\mu m*(1700-400) = 39 mm
+\end{equation}
+Which agrees with the ray trace in Figure 5, there labeled 40.984mm.
 
-It is at this point that the spectrometer design enters the electrical domain. Due to the
-photosensitive device being a photodiode where the current is a result of the optical power on the
-sensitive area, the team built a current-to-voltage converter which would be fed into the
-analog-to-digital converter. The primary issue at this point is just how small the optical power of
-the light is. Given that the sensors have a translation of 1nA/1mW of power, we needed to design a
-high gain, low noise converter. We chose 100e6 for the gain meaning that 1nA would translate to
-100mV which is over double the resolution of our 16-bit ADC.
+The rail has a stepper motor which engages rotation of a central rotor using four electromagnets to adjust the position of the rotor gear teeth by one quarter the width of a tooth. The Rattmmotor linear rail in this system uses the NEMA11, which has a minimum step angle of 1.8\textdegree. The rotor shaft has a mount that is moved up and down along the shaft threading. The pitch angle of this threading is such that for every full rotation, the mount moves 1mm. Therefore, the minimum step size is
+\begin{equation}
+    d = (\text{Thread pitch})*(\text{Pulse count})*(\frac{\text{Step angle}}{360\text{\textdegree}})
+\end{equation}
+\begin{equation}
+    d = 1 mm*(1)(\frac{1.8}{360}) = 5\mu m
+\end{equation}
+\subsubsection{Analog to Digital Conversion}
+The optical power passing into the housing is above 500$\mu $mW when the bulb is fully exposed to the fiber input head. At 50mm from the fiber head, with \~{}50\textdegree of dispersion, that drops to just above 10$\mu $mW. By removing the fiber input head from in front of the bulb and scattering light off a soil sample, the power drops below what an optical power meter can reliably detect. 
+
+It is at this point that the spectrometer design enters the electrical domain. Due to the photosensitive device being a photodiode where the current is a result of the optical power on the sensitive area, the team built a current-to-voltage converter which would be fed into the analog-to-digital converter. The primary issue at this point is just how small the optical power of the light is. Given that the sensors have a translation of 1nA/1mW of power, we needed to design a high gain, low noise converter. We chose 100e6 for the gain meaning that 1nA would translate to 100mV which is over double the resolution of our 16-bit ADC.
+
 \begin{figure}[H]
     \centering
     \includegraphics[height=.25\textheight]{images/SensorSchematics.PNG}
@@ -212,7 +248,9 @@ These steps will be used to measure OH composition and nutrients in the soil. Th
     \includegraphics[width=\linewidth]{images/mcu_v1_cpwg.jpg}
     \caption{The coplanar waveguide designed to carry a 2.4 GHz signal surrounded by via fencing.}
 \end{figure}
-\section{Software Detail}
+
+\section{Software Design}
+
 The microntroller serves as the glue holding this design together. In this section the means of
 integrating the various subsystems via software will be discussed.
 \subsection{Development Model}
