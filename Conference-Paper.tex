@@ -148,7 +148,7 @@ for control, as well as sent to the user for display. See below for a diagram sh
 through the system.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{images/Schematic Diagram 2.png}
+    \includegraphics[scale=0.5]{images/Schematic Diagram 2.png}
     \label{fig:sensing-block}
     \caption{Diagram showing the major components of the sensing subsystem.}
 \end{figure}
@@ -160,12 +160,12 @@ In order for our system to be as self and power efficient as possible from an en
 The Texas Instruments CC3220-series (hence referred to as the "CC3220", the "MCU", or the "microcontroller") of microcontrollers are WiFi-enabled chips with an ARM Cortex-M4 central processor and a WiFi network processor, along with many useful peripherals and power management modules. This series of processors is delivered alongside a software development kit (SDK) provided by Texas Instruments to ease the development of IoT applications. The CC3220 is capable of running on bare metal, or with a Real-time Operating System (RTOS), allowing us to organize and schedule our various tasks.
 
 The CC3220's WiFi network processor (NWP) supports 802.11b/g/n, SmartConfig provisioning, IPv4 and IPv6. The NWP also as the ability to host an internal HTTP/HTTPS server, and contains its own filesystem.
-\subsection{Photodetectors}
-When selecting a photodetector, the relevant concerns were sensitivity, effective area, and cost. Si photodiodes are cheap and reliable. Our team selected the BPX 61 by Newark, since it was the cheapest model and met our needs. The near infrared device required more careful selection. Many infrared photodetectors are used for high speed communications, with minimal surface areas and optimized rise times. Due to our concerns over signal to noise ratio, we opted for a model with a large effective area, the Thorlabs 0800-3111-011.
-\subsection{Light source}
+\subsection{Optics}
+When selecting photodetectors, the relevant concerns were sensitivity, effective area, and cost. For a Si photodiode, our team selected the BPX 61 by Newark, since it was the cheapest model and met our needs. The InGaAs diodes available were exceptionally small. Due to our concerns over signal to noise ratio, we opted for a model with a large effective area, the Thorlabs 0800-3111-011.
+
 Tungsten bulbs emit a broad spectrum, far into the infrared. They also come in small package sizes that emit a lot of light for reasonable power consumption. Our bulb, the Osram 54262 runs at 20 Watts of electrical power. This is supplied directly from the battery, though controlled by the microcontroller. The result is 350 lumens, mostly directed onto the soil.
-\subsection{Linear Rail}
-Referring to our high-level design, the team needed a linear rail with a sled that the sensors could be mounted to. The team found such a device on Amazon.
+
+Referring to our high-level design, the team needed a linear rail with a carriage mount that the sensors could be mounted to. We selected a 50mm long rail with a screw turned mount run by a NEMA11 stepper motor.
 \subsection{Water valve}
 As part of the goals, the team wanted to be able to control the flow of water into the plant bed. To accomplish this, they chose a solenoid valve whose rated pressure was well specificied for use with home water pressures.
 \section{Hardware Design}
@@ -188,9 +188,9 @@ Reflective diffraction gratings disperse light at an angle proportional to wavel
 where m stands for diffraction order, $\lambda$ refers to wavelength, d refers to grating spacing in grooves/mm, and $\alpha$ and $\beta$ stand for input and output angles respectively. Below, the first three orders of diffraction are solved for a beam with wavelengths from 400nm to 1700nm on a grating with 600 grooves/mm. The model allows testing for beams at different incident angles. 50\textdegree \: from normal was optimal, since it allowed the first order reflection to spread widely without coming back into the incident beam. The dispersion covers 47\textdegree.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{images/DiffractionAngleCalculator.png}
+    \includegraphics[scale=0.4]{images/PolarPlot.png}
     \label{fig:diffraction-angle}
-    \caption{The diffraction angle of 1st through 3rd order diffractions}
+    \caption{The diffraction angle of 1st through 3rd order diffractions. Note: higher orders have reduced power, negating the effect of overlap}
 \end{figure}
 \subsubsection{Cylindrical Lens}
 Light entering the spectrometer housing will exit the fiber patch cable through a collimator with matching numerical aperture. This expands the beam to a diameter of 1.7mm, shining a circular image away towards the diode rail. Ideally, the light would be focused to a point at the photodetector, where the optical power of a single wavelength would be measured. Instead, a large circle with \~{}1.7mm diameter will reach the rail. To fix this, a lens is positioned just far enough in front of the grating for the incident beam to clear its edge at 50\textdegree. The lens is cylindrical, focusing the light along the horizontal axis but not along the vertical axis. With the rail positioned right at the focal length of 50mm, the beam focuses neatly along the range of the photodetector.
@@ -419,20 +419,27 @@ This is a huge accomplishment for our team, especially with a program written in
 \end{figure}
 To drive a DC motor we similarly needed a device to separate the digital logic from the back emf of the motor. This is done through the use of the motor driver. The timing of the signals is the most important part as the driver is just using the current and voltage source designed specifically for the motor in the timings given by the input pins. Wrong timing leads to the ability to skip tests leading to indeterministic behavior. The issue is the the CC32xx SDK abstracts away a lot of the fine tunability of setting hardware registers. To resolve this, the team used the specific board's hardware driver implementation to set the output on the pins with a delay of only 28 cycles.
 \subsection{Over-the-Air Updates}
-At this time, our team does not intend to provide a method for over-the-air updates (OTA), however, this is a stretch goal that may be completed in the future.
+With the garden bed constructed, the power module in working order, and the program loaded onto the microcontroller, tests ran smoothly. The spectrometer was first run with a test surface to guarantee its SNR was readable and the motor carriage passed along the diffracted beam. With minimal adjustments, the device was ready for scanning. Three materials were tested: sandy soil collected outdoors near the university, potting soil and a composted manure soil, both purchased from a local hardware store. The scans are presented below.
 \section{Results}
 At time of writing, the system is integrated and generating data. It has not yet been calibrated against any soil samples.
 \begin{figure}[H]
-    \centering
-    \label{fig:VIS Data}
-    \includegraphics[width=\linewidth]{images/VIS Data.png}
-    \caption{Spectrograph for a reflective foil surface}
- \end{figure}
- \begin{figure}[H]
-    \centering
-    \label{fig:NIR Data}
-    \includegraphics[width=\linewidth]{images/NIR Data.png}
-    \caption{Spectrograph for a reflective foil surface}
- \end{figure}
+   \centering
+   \label{fig:Data1}
+   \includegraphics[width=\linewidth]{images/Data1.png}
+   \caption{Spectrograph of a fertilized bag of potting mix}
+\end{figure}
+\begin{figure}[H]
+   \centering
+   \label{fig:Data2}
+   \includegraphics[width=\linewidth]{images/Data2.png}
+   \caption{Spectrograph of a bag of compost manure soil}
+\end{figure} \begin{figure}[H]
+   \centering
+   \label{fig:Data3}
+   \includegraphics[width=\linewidth]{images/Data3.png}
+   \caption{Spectrograph of a dry, unfertilized Sandy Soil}
+\end{figure}
+Each dataset has been truncated to clarify the region measured by each sensor, though otherwise there was much overlap. The wavelengths were assigned to captures by position, with the initial position of 400nm being measured from the initial position of the sensor circuitry, the rest of the values being extrapolated from there. As is clear from the spectrographs, there is a dramatic difference between the spectral content of the fertilized soil and the sandy soil. The spectral resolution of the system was set with a tape slit over the visible sensor, however this can be improved on greatly. Another area of limitation was the number of datapoints captured. While Web interfacing is still unimplemented, the memory on the microcontroller limits the size of each scan. With a tighter sensor slit and finer steps between captures, the spectrometer should achieve a spectral resolution of >5nm. This will allow for high precision scanning on many samples for calibration.
+As of now, the major subsystems are all interfacing with each other to produce a genuine product, a spectrograph generating garden bed with infrastructure for automation and scaling.
 \input{references/references.tex}
 \end{document}
