@@ -465,6 +465,15 @@ the input pins. Wrong timing leads to the ability to skip tests leading to indet
 is the the CC32xx SDK abstracts away a lot of the fine tunability of setting hardware registers. To resolve this, 
 the team used the specific board's hardware driver implementation to set the output on the pins with a delay of only 28 cycles.
 \subsection{Over-the-Air Updates}
+At this time, our team does not intend to provide a method for over-the-air updates (OTA), however, this is a stretch goal
+that may be completed in the future.
+\subsection{Startup and Shutdown}
+Startup and shutdown will occur in a timely manner (within
+seconds). Abrupt shutdown shall not damage any components
+of the system, and the system will be able to restart to
+its previous state without any input from the user. If the
+system freezes or crashes, its internal watchdog timer will
+automatically reboot the device.
 
 \section{Results}
 With the garden bed constructed, the power module in working order, and the program loaded onto the microcontroller, 
@@ -475,18 +484,18 @@ manure soil, both purchased from a local hardware store. The scans are presented
 \begin{figure}[H]
    \centering
    \label{fig:Data1}
-   \includegraphics[width=\linewidth]{images/Data1.png}
+   \includegraphics[scale=0.6]{images/Data1.png}
    \caption{Spectrograph of a fertilized bag of potting mix}
 \end{figure}
 \begin{figure}[H]
    \centering
    \label{fig:Data2}
-   \includegraphics[width=\linewidth]{images/Data2.png}
+   \includegraphics[scale=0.6]{images/Data2.png}
    \caption{Spectrograph of a bag of compost manure soil}
 \end{figure} \begin{figure}[H]
    \centering
    \label{fig:Data3}
-   \includegraphics[width=\linewidth]{images/Data3.png}
+   \includegraphics[scale=0.6]{images/Data3.png}
    \caption{Spectrograph of a dry, unfertilized Sandy Soil}
 \end{figure}
 Each dataset has been truncated to clarify the region measured by each sensor, though otherwise there was much overlap. The wavelengths were assigned to captures by position, with the initial position of 400nm being measured from the initial position of the sensor circuitry, the rest of the values being extrapolated from there. As is clear from the spectrographs, there is a dramatic difference between the spectral content of the fertilized soil and the sandy soil. The spectral resolution of the system was set with a tape slit over the visible sensor, however this can be improved on greatly. Another area of limitation was the number of datapoints captured. While Web interfacing is still unimplemented, the memory on the microcontroller limits the size of each scan. With a tighter sensor slit and finer steps between captures, the spectrometer should achieve a spectral resolution of >5nm. This will allow for high precision scanning on many samples for calibration.
